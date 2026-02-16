@@ -1,0 +1,161 @@
+// .responsive-card {
+//   height: 96px;
+//   border-radius: 12px;
+// }
+
+// /* Cards row under header: centered single row, tidy spacing */
+// .cards-row {
+//   padding: 0;
+//   margin: -10px auto;
+//   max-width: 1520px;
+// }
+
+// .cards-row ion-row {
+//   display: flex;
+//   flex-wrap: wrap;
+//   justify-content: center;
+//   gap: 14px;
+//   align-items: stretch;
+//   overflow-x: hidden;
+// }
+
+// .cards-row ion-col {
+//   flex: 0 0 220px;
+//   max-width: 220px;
+//   padding: 0 6px;
+//   box-sizing: border-box;
+// }
+
+// @media (max-width: 900px) {
+//   .cards-row ion-col {
+//     flex: 0 0 calc(50% - 12px);
+//     max-width: calc(50% - 12px);
+//   }
+// }
+
+// @media (max-width: 480px) {
+//   .cards-row ion-col {
+//     /* force two columns on small mobile, override Ionic column sizes */
+//     flex: 0 0 calc(50% - 12px) !important;
+//     max-width: calc(50% - 12px) !important;
+//     width: calc(50% - 12px) !important;
+//     box-sizing: border-box !important;
+//     padding: 0 6px !important;
+//   }
+
+//   .cards-row ion-row {
+//     padding: 0 6px;
+//   }
+// }
+// .card-center {
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   height: 100%;
+//   font-size: 14px;
+//   font-weight: 600;
+//   text-align: center;
+// }
+
+// /* Tablet */
+// @media (min-width: 768px) {
+//   .responsive-card {
+//     height: 110px;
+//   }
+
+//   .card-center {
+//     font-size: 16px;
+//   }
+// }
+
+// .stat-card {
+//   padding: 16px 12px;
+//   gap: 8px;
+// }
+
+// .stat-icon {
+//   font-size: 28px;
+// }
+
+// .stat-label {
+//   font-size: 12px;
+// }
+// ion-menu .cards-row ion-col {
+//   flex: 0 0 100% !important;
+//   max-width: 100% !important;
+// }
+.custom-toolbar {
+  --background: linear-gradient(135deg, #8f8bff, #ff9fb2);
+  --color: #fff;
+  --font-weight: 600;
+}
+.custom-card {
+  border-radius: 12px;
+  color: #fff;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 120px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-size: cover; /* ensures gradient covers full card */
+  background-repeat: no-repeat;
+}
+
+/* Top row: title + value on left, icon on right */
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+/* Title + value stacked */
+.card-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-label {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.stat-value {
+  font-size: 20px;
+  font-weight: 700;
+  margin-top: 4px;
+}
+
+ .stat-icon {
+  font-size: 28px;
+}
+
+ .card-bottom {
+  font-size: 12px;
+  font-weight: 500;
+  text-align: left;
+  opacity: 0.9;
+  display: flex;
+  align-items: center;
+}
+
+.arrow {
+  margin-left: 8px;
+  font-size: 14px;
+}
+
+ @media (max-width: 480px) {
+  .stat-label {
+    font-size: 13px;
+  }
+  .stat-value {
+    font-size: 18px;
+  }
+  .stat-icon {
+    font-size: 24px;
+  }
+  .card-bottom {
+    font-size: 11px;
+  }
+}

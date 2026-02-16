@@ -1,0 +1,461 @@
+.room-card {
+  border-radius: 14px;
+  padding-bottom: 6px;
+}
+
+ion-card-header {
+  padding-bottom: 0;
+}
+
+ion-card-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #777;
+  letter-spacing: 0.5px;
+}
+
+ion-card-content {
+  padding-top: 8px;
+}
+
+.item {
+  text-align: center;
+  padding: 14px 0;
+}
+
+.item ion-icon {
+  font-size: 22px;
+  color: #666;
+  margin-bottom: 6px;
+}
+
+.count {
+  font-size: 20px;
+  font-weight: 600;
+  color: #000;
+  margin-bottom: 2px;
+}
+
+.label {
+  font-size: 11px;
+  color: #888;
+  line-height: 1.2;
+}
+
+.top-toolbar {
+  --background: #3f74b5;
+  padding: 10px 14px;
+  box-shadow: 0 4px 18px rgba(50, 70, 120, 0.12);
+}
+
+.header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+/* make header a positioned container so actions can be absolutely placed */
+.header-row {
+  position: relative;
+}
+
+.header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.app-title {
+  color: #fff;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
+
+.app-subtitle {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 12px;
+  opacity: 0.95;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+/* KPI ROW – DEFAULT (DESKTOP) */
+.kpi-row {
+  display: flex;
+  gap: 12px;
+  max-width: 100%;
+  width: auto;
+  margin: 0 auto; /* center the group inside header-right */
+}
+
+/* KPI CARD */
+.kpi-card {
+  flex: 0 0 150px; /* fixed card width so group can be centered */
+  background: linear-gradient(135deg, #8f8bff, #ff9fb2);
+  border-radius: 10px;
+  text-align: center;
+  padding: 8px 8px;
+  color: #fff;
+  width: 150px;
+}
+
+.kpi-title {
+  font-size: 11px;
+}
+
+.kpi-value {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+/* OCC CARD */
+.occ-card {
+  background: linear-gradient(135deg, #7b5cff, #6c63ff);
+}
+
+.occ-circle {
+  background: #fff;
+  color: #6c63ff;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  line-height: 36px;
+  margin: 6px auto 0;
+  font-weight: bold;
+}
+
+.header-actions ion-button {
+  --color: rgba(255, 255, 255, 0.95);
+  --padding-start: 6px;
+  --padding-end: 6px;
+}
+
+/* header actions: default flow; pinned on wide screens in media query below */
+.header-actions {
+  position: static;
+  display: flex;
+  gap: 6px;
+}
+
+/* ============================= */
+/* 📱 MOBILE – FULL ROW CARDS */
+/* ============================= */
+@media (max-width: 600px) {
+  .header-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 6px;
+    padding: 8px 6px;
+  }
+
+  .header-right {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* KPI cards: 2-column grid on small screens for balanced layout */
+  .kpi-row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    width: 100%;
+    padding: 6px 8px;
+    box-sizing: border-box;
+  }
+
+  .kpi-card {
+    flex: none;
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 12px;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.06);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 64px;
+    /* keep original card background colors (do not override) */
+  }
+
+  .kpi-title {
+    font-size: 12px;
+    opacity: 0.9;
+  }
+  .kpi-value {
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  .occ-card .occ-circle {
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 14px;
+  }
+
+  /* actions below cards, compact and centered */
+  .header-actions {
+    position: static;
+    transform: none;
+    margin-top: 8px;
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .header-actions ion-button {
+    --padding-start: 8px;
+    --padding-end: 8px;
+    height: 40px;
+    width: 40px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.035);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .header-actions ion-icon {
+    font-size: 18px;
+    color: #fff;
+  }
+}
+
+/* Right buttons */
+.header-actions {
+  display: flex;
+  gap: 4px;
+}
+
+ion-button {
+  color: #fff;
+}
+
+.links {
+  margin: 10px 0;
+}
+
+.link {
+  margin-right: 15px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.red {
+  color: red;
+}
+.green {
+  color: green;
+}
+.blue {
+  color: blue;
+}
+
+.table-header {
+  background: #3f74b5;
+  color: #fff;
+  font-weight: 600;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 40px;
+  color: #777;
+}
+
+.empty-state ion-icon {
+  font-size: 48px;
+  margin-bottom: 10px;
+}
+
+.ml {
+  margin-left: 6px;
+}
+ion-card-content {
+  height: 140px;
+}
+.table-scroll {
+  overflow-x: auto;
+  width: 100%;
+}
+
+.table-header {
+  min-width: 900px; // forces horizontal scroll
+}
+
+.table-header ion-col {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.table-title {
+  padding: 12px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 40px 0;
+  color: #94a3b8;
+}
+
+.empty-state ion-icon {
+  font-size: 36px;
+  margin-bottom: 6px;
+}
+// .scroll-grid {
+//   overflow-x: auto;
+// }
+
+// .nowrap-row {
+//   flex-wrap: nowrap;
+// }
+
+// .fixed-card {
+//   min-width: 200px;
+//   height: 100px;
+// }
+// .scroll-grid {
+//   overflow-x: auto;
+// }
+
+// .nowrap-row {
+//   flex-wrap: nowrap;
+// }
+
+// .fixed-card {
+//      min-width: 266px;
+//     height: 100px;
+// }
+
+// .card-center {
+//   display: flex;
+//   align-items: center; /* vertical center */
+//   justify-content: center; /* horizontal center */
+//   font-weight: 600;
+//   font-size: 16px;
+//   height: 100%;
+// }
+/* Horizontal scroll for mobile */
+
+.responsive-card {
+  height: 55px;
+  border-radius: 12px;
+}
+
+/* Cards row under header: centered single row, tidy spacing */
+.cards-row {
+  padding: 0;
+  margin: -10px auto;
+  max-width: 1520px;
+}
+
+.cards-row ion-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+  align-items: stretch;
+  overflow-x: hidden;
+}
+
+.cards-row ion-col {
+  flex: 0 0 220px;
+  max-width: 220px;
+  padding: 0 6px;
+  box-sizing: border-box;
+}
+
+@media (max-width: 900px) {
+  .cards-row ion-col {
+    flex: 0 0 calc(50% - 12px);
+    max-width: calc(50% - 12px);
+  }
+}
+
+@media (max-width: 480px) {
+  .cards-row ion-col {
+    /* force two columns on small mobile, override Ionic column sizes */
+    flex: 0 0 calc(50% - 12px) !important;
+    max-width: calc(50% - 12px) !important;
+    width: calc(50% - 12px) !important;
+    box-sizing: border-box !important;
+    padding: 0 6px !important;
+  }
+
+  .cards-row ion-row {
+    padding: 0 6px;
+  }
+}
+.card-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* Tablet */
+@media (min-width: 768px) {
+  .responsive-card {
+    height: 110px;
+  }
+
+  .card-center {
+    font-size: 16px;
+  }
+}
+.chart {
+  height: auto;
+  /* Chart container sizes per breakpoint */
+  .chart-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 320px; /* desktop default */
+  }
+
+  /* make canvas fill container (Chart.js options set maintainAspectRatio:false) */
+  canvas {
+    width: 100% !important;
+    height: 100% !important;
+    display: block;
+  }
+
+  /* ensure card content doesn't constrain chart */
+  ion-card-content {
+    height: auto !important;
+    padding: 0 !important;
+  }
+
+  @media (max-width: 900px) {
+    .chart-container {
+      height: 260px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .chart-container {
+      height: 200px;
+    }
+  }
+
+  @media (max-width: 400px) {
+    .chart-container {
+      height: 160px;
+    }
+  }
+}

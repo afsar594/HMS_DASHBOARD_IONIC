@@ -1,0 +1,951 @@
+.top-toolbar {
+  --background: #3f74b5;
+  padding: -1px 14px;
+  box-shadow: 0 4px 18px rgba(50, 70, 120, 0.12);
+}
+
+.header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+/* make header a positioned container so actions can be absolutely placed */
+.header-row {
+  position: relative;
+}
+
+.header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.app-title {
+  color: #fff;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
+
+.app-subtitle {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 12px;
+  opacity: 0.95;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+/* KPI ROW – DEFAULT (DESKTOP) */
+.kpi-row {
+  display: flex;
+  gap: 12px;
+  max-width: 100%;
+  width: auto;
+  margin: 0 auto; /* center the group inside header-right */
+}
+
+/* KPI CARD */
+.kpi-card {
+  flex: 0 0 150px; /* fixed card width so group can be centered */
+  background: linear-gradient(135deg, #8f8bff, #ff9fb2);
+  border-radius: 10px;
+  text-align: center;
+  padding: 8px 8px;
+  color: #fff;
+  width: 150px;
+}
+
+.kpi-title {
+  font-size: 11px;
+}
+
+.kpi-value {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+/* OCC CARD */
+.occ-card {
+  background: linear-gradient(135deg, #7b5cff, #6c63ff);
+}
+
+.occ-circle {
+  background: #fff;
+  color: #6c63ff;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  line-height: 36px;
+  margin: 6px auto 0;
+  font-weight: bold;
+}
+
+.header-actions ion-button {
+  --color: rgba(255, 255, 255, 0.95);
+  --padding-start: 6px;
+  --padding-end: 6px;
+}
+
+/* header actions: default flow; pinned on wide screens in media query below */
+.header-actions {
+  position: static;
+  display: flex;
+  gap: 6px;
+}
+
+/* ============================= */
+/* 📱 MOBILE – FULL ROW CARDS */
+/* ============================= */
+@media (max-width: 600px) {
+  .header-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 6px;
+    padding: 5px 4px;
+  }
+
+  .header-right {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* KPI cards: 2-column grid on small screens for balanced layout */
+  .kpi-row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    width: 100%;
+    padding: 6px 8px;
+    box-sizing: border-box;
+  }
+
+  .kpi-card {
+    flex: none;
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 12px;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.06);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 64px;
+    /* keep original card background colors (do not override) */
+  }
+
+  .kpi-title {
+    font-size: 12px;
+    opacity: 0.9;
+  }
+  .kpi-value {
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  .occ-card .occ-circle {
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 14px;
+  }
+
+  /* actions below cards, compact and centered */
+  .header-actions {
+    position: static;
+    transform: none;
+    margin-top: 8px;
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .header-actions ion-button {
+    --padding-start: 8px;
+    --padding-end: 8px;
+    height: 40px;
+    width: 40px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.035);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .header-actions ion-icon {
+    font-size: 18px;
+    color: #fff;
+  }
+}
+
+.modern-content {
+  --background: #f8fafc;
+  --padding-start: 0;
+  --padding-end: 0;
+  --padding-top: 0;
+  --padding-bottom: 0;
+}
+
+.stats-section {
+  padding: 20px 16px;
+  background: #f8fafc;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  width: 100%;
+}
+
+ion-card.stat-card {
+  /* keep ion-card background/color from Ionic `color` attribute */
+  border-radius: 16px;
+  padding: 20px 16px;
+  text-align: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+
+  &:active {
+    transform: scale(0.98);
+  }
+
+  &:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
+  }
+
+  .stat-icon {
+    font-size: 32px;
+  }
+
+  .stat-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: inherit; /* use card color's contrast */
+  }
+}
+
+// Color variants
+.stat-primary {
+  border-left: 4px solid #3b82f6;
+  .stat-icon {
+    color: #3b82f6;
+  }
+}
+.stat-success {
+  border-left: 4px solid #10b981;
+  .stat-icon {
+    color: #10b981;
+  }
+}
+.stat-warning {
+  border-left: 4px solid #f59e0b;
+  .stat-icon {
+    color: #f59e0b;
+  }
+}
+.stat-danger {
+  border-left: 4px solid #ef4444;
+  .stat-icon {
+    color: #ef4444;
+  }
+}
+
+/* ============================= */
+/* SECTION CONTAINERS */
+/* ============================= */
+.section-container {
+  padding: 24px 16px 0;
+
+  .section-title {
+    margin: 0 0 16px 0;
+    font-size: 18px;
+    font-weight: 700;
+    color: #1e293b;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+}
+
+.charts-section {
+  padding: 24px 16px;
+
+  .section-title {
+    margin: 0 0 16px 0;
+    font-size: 18px;
+    font-weight: 700;
+    color: #1e293b;
+  }
+}
+
+/* ============================= */
+/* MODERN CARDS */
+/* ============================= */
+.modern-card {
+  border-radius: 16px;
+  margin: 0 0 20px 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e2e8f0;
+  overflow: hidden;
+  background: #ffffff;
+  --background: #ffffff;
+
+  ion-card-header {
+    background: #f8fafc;
+    border-bottom: 1px solid #e2e8f0;
+    padding: 16px;
+
+    ion-card-title {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 700;
+      color: #1e293b;
+    }
+  }
+
+  ion-card-content {
+    padding: 0;
+    height: auto !important;
+  }
+}
+
+.table-card {
+  margin-left: 16px;
+  margin-right: 16px;
+}
+
+ion-card {
+  margin: 0 16px 20px 16px;
+}
+
+/* ============================= */
+/* TABLE STYLING */
+/* ============================= */
+.modern-table-header {
+  padding: 0;
+  background: linear-gradient(90deg, #3f74b5, #2d5a8f);
+  color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(140px, 1fr);
+  width: 100%;
+  min-width: max-content; /* force overflow on small screens */
+}
+
+.table-row {
+  padding: 0;
+  display: contents;
+}
+
+.table-cell {
+  padding: 14px 18px;
+  font-weight: 600;
+  font-size: 12px;
+  white-space: nowrap;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  min-width: 140px; /* ensure cells don't shrink below this */
+}
+
+.table-cell:last-child {
+  border-right: none;
+}
+
+.table-scroll {
+  overflow-x: auto;
+  width: 100%;
+  -webkit-overflow-scrolling: touch;
+
+  &::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #f8fafc;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #e2e8f0;
+    border-radius: 3px;
+
+    &:hover {
+      background: #cbd5e1;
+    }
+  }
+}
+
+/* ============================= */
+/* EMPTY STATE */
+/* ============================= */
+.empty-state-modern {
+  text-align: center;
+  padding: 48px 24px;
+  background: #f8fafc;
+  color: #64748b;
+
+  .empty-icon {
+    font-size: 48px;
+    display: block;
+    margin-bottom: 12px;
+    opacity: 0.8;
+  }
+
+  p {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 500;
+  }
+}
+
+/* Mobile-friendly empty state */
+@media (max-width: 480px) {
+  .empty-state-modern {
+    padding: 28px 16px;
+
+    .empty-icon {
+      font-size: 36px;
+      margin-bottom: 8px;
+    }
+
+    p {
+      font-size: 13px;
+      line-height: 1.4;
+    }
+  }
+}
+
+@media (max-width: 320px) {
+  .empty-state-modern {
+    padding: 20px 12px;
+
+    .empty-icon {
+      font-size: 28px;
+      margin-bottom: 6px;
+    }
+
+    p {
+      font-size: 12px;
+    }
+  }
+}
+
+/* ============================= */
+/* CHART STYLING */
+/* ============================= */
+.chart {
+  height: auto;
+
+  .chart-header {
+    background: linear-gradient(90deg, #3f74b5 0%, #2d5a8f 100%);
+    border: none;
+    padding: 16px;
+
+    ion-card-title {
+      color: #fff;
+      font-size: 16px;
+      font-weight: 700;
+      margin: 0;
+    }
+  }
+
+  .chart-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 280px;
+    padding: 16px 0;
+  }
+
+  canvas {
+    width: 100% !important;
+    height: 100% !important;
+    display: block;
+  }
+
+  ion-card-content {
+    height: auto !important;
+    padding: 0 !important;
+  }
+}
+
+/* ============================= */
+/* SPACER */
+/* ============================= */
+.spacer {
+  height: 20px;
+}
+
+/* ============================= */
+/* TABLET BREAKPOINTS */
+/* ============================= */
+@media (min-width: 640px) {
+  .kpi-row {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .section-container,
+  .charts-section {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  ion-card {
+    margin-left: 24px;
+    margin-right: 24px;
+  }
+
+  .chart {
+    .chart-container {
+      height: 320px;
+    }
+  }
+}
+
+/* ============================= */
+/* MEDIUM SCREENS */
+/* ============================= */
+@media (min-width: 768px) {
+  .kpi-row {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+
+  .header-text {
+    .header-title {
+      font-size: 32px;
+    }
+  }
+
+  .section-container,
+  .charts-section {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+
+  ion-card {
+    margin-left: 32px;
+    margin-right: 32px;
+  }
+
+  .chart {
+    .chart-container {
+      height: 360px;
+    }
+  }
+}
+
+/* ============================= */
+/* LARGE SCREENS */
+/* ============================= */
+@media (min-width: 1024px) {
+  .kpi-row {
+    grid-template-columns: repeat(6, 1fr);
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  .kpi-section {
+    padding: 24px 40px;
+  }
+
+  .section-container,
+  .charts-section {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+
+  ion-card {
+    margin-left: 40px;
+    margin-right: 40px;
+  }
+
+  .chart {
+    .chart-container {
+      height: 400px;
+    }
+  }
+}
+
+/* ============================= */
+/* ANIMATIONS */
+/* ============================= */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.kpi-card,
+.stat-card,
+.modern-card {
+  animation: slideUp 0.4s ease-out;
+}
+
+ion-header {
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* ============================= */
+/* UTILITY CLASSES */
+/* ============================= */
+.ml {
+  margin-left: 6px;
+}
+
+ion-checkbox {
+  margin-right: 6px;
+}
+
+/* ============================= */
+/* ION COMPONENT CUSTOMIZATION */
+/* ============================= */
+::ng-deep {
+  ion-card {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06) !important;
+  }
+
+  ion-button {
+    --padding-start: 12px;
+    --padding-end: 12px;
+    text-transform: none;
+    font-weight: 600;
+    border-radius: 10px;
+  }
+
+  ion-select {
+    --padding-start: 12px;
+    --padding-end: 12px;
+  }
+}
+
+/* ============================= */
+/* RESPONSIVE ADJUSTMENTS */
+/* ============================= */
+@media (max-width: 480px) {
+  .kpi-row {
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .modern-toolbar {
+    --padding-start: 16px;
+    --padding-end: 16px;
+
+    .header-text {
+      .header-title {
+        font-size: 24px;
+      }
+
+      .header-subtitle {
+        font-size: 12px;
+      }
+    }
+  }
+
+  .section-container,
+  .charts-section,
+  .kpi-section {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  ion-card {
+    margin-left: 16px;
+    margin-right: 16px;
+  }
+
+  .chart {
+    .chart-container {
+      height: 240px;
+    }
+  }
+
+  .stat-card {
+    padding: 16px 12px;
+    gap: 8px;
+  }
+
+  .stat-icon {
+    font-size: 28px;
+  }
+
+  .stat-label {
+    font-size: 12px;
+  }
+
+  .kpi-card {
+    padding: 0px 8px;
+    gap: 0px;
+  }
+
+  .kpi-icon {
+    font-size: 20px;
+  }
+
+  .kpi-title {
+    font-size: 10px;
+  }
+
+  .kpi-value {
+    font-size: 18px;
+  }
+}
+/* Room Card */
+.room-card {
+  border-radius: 16px;
+}
+
+/* Stat Card */
+.stat-card {
+  border-radius: 14px;
+  height: 130px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  transition: 0.3s ease;
+}
+
+/* Hover Effect */
+.stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+}
+
+/* Inner Content */
+.stat-wrapper {
+  text-align: center;
+}
+
+/* Icon */
+.stat-icon {
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+
+/* Label */
+.stat-label {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+  .stat-card {
+    height: 110px;
+  }
+
+  .stat-icon {
+    font-size: 24px;
+  }
+
+  .stat-label {
+    font-size: 14px;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+  .stat-card {
+    height: 80px;
+  }
+}
+
+// .responsive-card {
+//   height: 70px;
+//   width: 170px;
+//   border-radius: 12px;
+// }
+
+//  .cards-row {
+//   padding: 0;
+//   margin: 12px auto;
+//   max-width: 1520px;
+// }
+
+// .cards-row ion-row {
+//   display: flex;
+//   flex-wrap: wrap;
+//   justify-content: center;
+// //   gap: 14px;
+//   align-items: stretch;
+//   overflow-x: hidden;
+// }
+
+// .cards-row ion-col {
+//   flex: 0 0 220px;
+//   max-width: 220px;
+//   padding: 0 6px;
+//   box-sizing: border-box;
+// }
+// .room-card {
+//   border-radius: 14px;
+//   padding-bottom: 6px;
+// }
+// @media (max-width: 900px) {
+//   .cards-row ion-col {
+//     flex: 0 0 calc(50% - 12px);
+//     max-width: calc(50% - 12px);
+//   }
+// }
+
+// @media (max-width: 480px) {
+//   .cards-row ion-col {
+//     /* force two columns on small mobile, override Ionic column sizes */
+//     flex: 0 0 calc(50% - 12px) !important;
+//     max-width: calc(50% - 12px) !important;
+//     width: calc(50% - 12px) !important;
+//     box-sizing: border-box !important;
+//     padding: 0 6px !important;
+//   }
+
+//   .cards-row ion-row {
+//     padding: 0px 0px;
+//   }
+// }
+// .card-center {
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   height: 100%;
+//   font-size: 14px;
+//   font-weight: 600;
+//   text-align: center;
+// }
+
+//  @media (min-width: 768px) {
+//   .responsive-card {
+//     height: 110px;
+//   }
+
+//   .card-center {
+//     font-size: 16px;
+//   }
+// }
+.chart {
+  height: auto;
+  /* Chart container sizes per breakpoint */
+  .chart-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 320px; /* desktop default */
+  }
+
+  /* make canvas fill container (Chart.js options set maintainAspectRatio:false) */
+  canvas {
+    width: 100% !important;
+    height: 100% !important;
+    display: block;
+  }
+
+  /* ensure card content doesn't constrain chart */
+  ion-card-content {
+    height: auto !important;
+    padding: 0 !important;
+  }
+
+  @media (max-width: 900px) {
+    .chart-container {
+      height: 260px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .chart-container {
+      height: 200px;
+    }
+  }
+
+  @media (max-width: 400px) {
+    .chart-container {
+      height: 160px;
+    }
+  }
+}
+
+/* Additional small-screen header/card height tweaks */
+@media (max-width: 420px) {
+  /* Reduce padding on card headers so header cards appear smaller on mobile */
+  .modern-card ion-card-header,
+  ion-card .chart-header,
+  ion-card .brand {
+    padding-top: 8px !important;
+    padding-bottom: 8px !important;
+  }
+
+  .modern-card ion-card-header ion-card-title,
+  ion-card .chart-header ion-card-title {
+    font-size: 14px !important;
+  }
+
+  /* Tighter spacing for the card content */
+  .modern-card ion-card-content,
+  .modern-card ion-card-header {
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+  }
+
+  /* Reduce table header height */
+  .modern-table-header {
+    grid-auto-columns: minmax(110px, 1fr) !important;
+  }
+
+  /* Slightly reduce overall card radii for compact look */
+  .modern-card {
+    border-radius: 12px;
+  }
+}
