@@ -11,20 +11,19 @@ import { Chart, registerables } from 'chart.js';
 Chart.register(...registerables);
 // import { ExploreContainerComponent } from '../explore-container/explore-container.component';
 import { CommonModule } from '@angular/common';
+import { ApiService } from '../api-service';
 @Component({
   selector: 'app-tab3',
   templateUrl: 'tab3.page.html',
   styleUrls: ['tab3.page.scss'],
   standalone: true,
 
-  imports: [
-    CommonModule,
-    IonicModule
-  ],
+  imports: [CommonModule, IonicModule],
 })
 export class Tab3Page implements OnDestroy {
   @ViewChild('avgChart') avgChartRef!: ElementRef<HTMLCanvasElement>;
   @ViewChild('revenueChart') revenueChartRef!: ElementRef<HTMLCanvasElement>;
+  guests: any;
 
   avgChart!: Chart;
   revenueChart!: Chart;
@@ -158,7 +157,62 @@ export class Tab3Page implements OnDestroy {
     'Nationality',
     'C/O',
   ];
-  constructor() {}
+  constructor(private api: ApiService) {}
+  ngOnInit() {
+    this.guests = [
+      {
+        roomNo: '101',
+        name: 'John Doe',
+        checkInDate: new Date('2026-02-15'),
+        tariff: 120,
+        balance: 50,
+      },
+      {
+        roomNo: '102',
+        name: 'Jane Smith',
+        checkInDate: new Date('2026-02-16'),
+        tariff: 150,
+        balance: 0,
+      },
+      {
+        roomNo: '103',
+        name: 'Michael Brown',
+        checkInDate: new Date('2026-02-17'),
+        tariff: 200,
+        balance: 30,
+      },
+      {
+        roomNo: '104',
+        name: 'Alice Johnson',
+        checkInDate: new Date('2026-02-18'),
+        tariff: 180,
+        balance: 20,
+      },
+    ];
+    // this.GetCurrentGuests();
+    this.GetTodayVoidTransactions();
+  }
+  GetCurrentGuests() {
+    this.api.GetCurrentGuests().subscribe(
+      (res) => {
+        if (res.isSuccess && res.data) {
+          this.guests = res.data; // populate table with API response
+          console.log('guest', this.guests);
+        } else {
+          this.guests = [];
+        }
+      },
+      (err) => {
+        console.error('API Error', err);
+        this.guests = [];
+      },
+    );
+  }
+  GetTodayVoidTransactions() {
+    this.api.GetTodayVoidTransactions().subscribe((res) => {
+      console.log('response of void transection', res);
+    });
+  }
 
   getCardIcon(title: string): string {
     const icons: { [key: string]: string } = {

@@ -7,7 +7,7 @@ import {
   IonLabel,
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { triangle, ellipse, square } from 'ionicons/icons';
+import { triangle, ellipse, square, logOutOutline } from 'ionicons/icons';
 import {
   IonButtons,
   IonContent,
@@ -19,6 +19,7 @@ import {
 } from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
+import { AuthService } from '../auth/auth-service';
 @Component({
   selector: 'app-tabs',
   templateUrl: 'tabs.page.html',
@@ -29,52 +30,56 @@ import { IonicModule } from '@ionic/angular';
 export class TabsPage {
   public environmentInjector = inject(EnvironmentInjector);
 
-  constructor() {
-    addIcons({ triangle, ellipse, square });
+  constructor(private api: AuthService) {
+    addIcons({ triangle, ellipse, square, logOutOutline });
   }
-cards = [
-  {
-    title: 'Vacant',
-    value: 10,
-    actionLabel: 'View Rooms',
-    color: 'linear-gradient(90deg, #4caf50, #8fc692)',
-  },
-  {
-    title: 'Occupid',
-    value: 5,
-    actionLabel: 'View Rooms',
-    color: 'linear-gradient(90deg, #f44336, #ee807e)',
-  },
-  {
-    title: 'Total Pax',
-    value: 50,
-    actionLabel: 'View Guests',
-    color: 'linear-gradient(90deg, #2196f3, #7ebef3)',
-  },
-  {
-    title: 'Today Checkout',
-    value: 3,
-    actionLabel: 'View Checkouts',
-    color: 'linear-gradient(90deg, #ff9800, #edb868)',
-  },
-  {
-    title: 'Zxp Arrivals',
-    value: 8,
-    actionLabel: 'View Arrivals',
-    color: 'linear-gradient(90deg, #9c27b0, #a668b0)',
-  },
-];
+  ngOnInit() {}
+  logout() {
+    this.api.logout();
+  }
+  cards = [
+    {
+      title: 'Vacant',
+      value: 10,
+      actionLabel: 'View Rooms',
+      color: 'linear-gradient(90deg, #4caf50, #8fc692)',
+    },
+    {
+      title: 'Occupid',
+      value: 5,
+      actionLabel: 'View Rooms',
+      color: 'linear-gradient(90deg, #f44336, #ee807e)',
+    },
+    {
+      title: 'Total Pax',
+      value: 50,
+      actionLabel: 'View Guests',
+      color: 'linear-gradient(90deg, #2196f3, #7ebef3)',
+    },
+    {
+      title: 'Today Checkout',
+      value: 3,
+      actionLabel: 'View Checkouts',
+      color: 'linear-gradient(90deg, #ff9800, #edb868)',
+    },
+    {
+      title: 'Zxp Arrivals',
+      value: 8,
+      actionLabel: 'View Arrivals',
+      color: 'linear-gradient(90deg, #9c27b0, #a668b0)',
+    },
+  ];
 
-getCardIcon(title: string): string {
-  const icons: { [key: string]: string } = {
-    Vacant: '🔓',
-    Occupid: '🛏️',
-    'Total Pax': '👥',
-    'Today Checkout': '🚪',
-    'Zxp Arrivals': '✈️',
-  };
-  return icons[title] || '📊';
-}
+  getCardIcon(title: string): string {
+    const icons: { [key: string]: string } = {
+      Vacant: '🔓',
+      Occupid: '🛏️',
+      'Total Pax': '👥',
+      'Today Checkout': '🚪',
+      'Zxp Arrivals': '✈️',
+    };
+    return icons[title] || '📊';
+  }
 
   // cards = [
   //   {
