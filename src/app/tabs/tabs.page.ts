@@ -7,7 +7,7 @@ import {
   IonLabel,
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { triangle, ellipse, square, logOutOutline } from 'ionicons/icons';
+import { triangle, ellipse, square, logOutOutline, powerOutline } from 'ionicons/icons';
 import {
   IonButtons,
   IonContent,
@@ -31,7 +31,7 @@ export class TabsPage {
   public environmentInjector = inject(EnvironmentInjector);
 
   constructor(private api: AuthService) {
-    addIcons({ triangle, ellipse, square, logOutOutline });
+    addIcons({ triangle, ellipse, square, logOutOutline,powerOutline });
   }
   ngOnInit() {}
   logout() {
