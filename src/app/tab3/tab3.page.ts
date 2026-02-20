@@ -34,8 +34,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     imports: [
         CommonModule,      // for ngFor, ngIf, etc.
     DatePipe,          // for {{ date | date }}
-    CurrencyPipe,      // for {{ value | currency }}
-    IonContent,
+     IonContent,
     IonHeader,
     IonToolbar,
      

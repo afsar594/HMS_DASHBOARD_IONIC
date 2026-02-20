@@ -1,19 +1,23 @@
 import { Component, EnvironmentInjector, inject } from '@angular/core';
- 
+
 import { addIcons } from 'ionicons';
-import { triangle, ellipse, square, logOutOutline, powerOutline } from 'ionicons/icons';
 import {
- IonTabs,
+  triangle,
+  ellipse,
+  square,
+  logOutOutline,
+  powerOutline,
+} from 'ionicons/icons';
+import {
+  IonTabs,
   IonTabBar,
   IonTabButton,
   IonIcon,
   IonLabel,
-  IonButton,
- IonHeader,
+   IonHeader,
   IonToolbar,
   IonTitle,
   IonContent,
-   
 } from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
@@ -22,24 +26,23 @@ import { AuthService } from '../auth/auth-service';
   selector: 'app-tabs',
   templateUrl: 'tabs.page.html',
   styleUrls: ['tabs.page.scss'],
-   imports: [IonTabs,
-  IonTabBar,
-  IonTabButton,
-  IonIcon,
-  IonLabel,
-  IonButton,
-    IonHeader,
-  IonToolbar,
-  IonTitle,
-  IonContent,
-  IonButton,
-    ],
+  imports: [
+    IonTabs,
+    IonTabBar,
+    IonTabButton,
+    IonIcon,
+    IonLabel,
+     IonHeader,
+    IonToolbar,
+    IonTitle,
+    IonContent,
+  ],
 })
 export class TabsPage {
   public environmentInjector = inject(EnvironmentInjector);
 
   constructor(private api: AuthService) {
-    addIcons({ triangle, ellipse, square, logOutOutline,powerOutline });
+    addIcons({ triangle, ellipse, square, logOutOutline, powerOutline });
   }
   ngOnInit() {}
   logout() {
