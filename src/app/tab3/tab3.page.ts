@@ -48,6 +48,7 @@ import { ReactiveFormsModule } from '@angular/forms';
      ],
  })
 export class Tab3Page implements OnDestroy {
+voidTransactions: any
   @ViewChild('avgChart') avgChartRef!: ElementRef<HTMLCanvasElement>;
   @ViewChild('revenueChart') revenueChartRef!: ElementRef<HTMLCanvasElement>;
   guests: any[] = [];
@@ -186,7 +187,11 @@ export class Tab3Page implements OnDestroy {
   ];
   constructor(private api: ApiService) {}
   ngOnInit() {
- 
+   this.voidTransactions = [
+  { room: 101, description: 'Mini Bar Charge', amount: 45, voidNo: 'V-1001' },
+  { room: 204, description: 'Room Service', amount: 120, voidNo: 'V-1002' },
+  { room: 305, description: 'Laundry Service', amount: 30, voidNo: 'V-1003' }
+];
      this.GetCurrentGuests();
     this.GetTodayVoidTransactions();
   }

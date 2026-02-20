@@ -67,12 +67,11 @@
   </div>
 
   <!-- Guests Table -->
-  <div class="section-container">
+  <!-- <div class="section-container">
     <h2 class="section-title">👥 Current Guests</h2>
     <ion-card class="modern-card">
       <div class="table-scroll">
         <ion-grid>
-          <!-- Table Header -->
           <ion-row >
             <ion-col >Room No</ion-col>
             <ion-col >Guest Name</ion-col>
@@ -89,15 +88,42 @@
     </ion-row>
         </ion-grid>
       </div>
-
-      <!-- Show empty state only if no data -->
       <div class="empty-state-modern" *ngIf="guests.length === 0">
         <div class="empty-icon">👤</div>
         <p>No guest records found</p>
       </div>
     </ion-card>
-  </div>
+  </div> -->
+  <div class="section-container">
+    <h2 class="section-title">🗑️ Void Transactions Today</h2>
+    <ion-card class="modern-card">
+      <div class="table-scroll">
+        <ion-grid class="modern-table-header">
+          <ion-row class="table-row">
+           <ion-col >Room No</ion-col>
+            <ion-col >Guest Name</ion-col>
+            <ion-col >Check-in Date</ion-col>
+            <ion-col >Tariff</ion-col>
+            <ion-col >Balance</ion-col>
+          </ion-row>
+        </ion-grid>
+        <ion-grid>
+  <ion-row  *ngFor="let guest of guests">
+       <ion-col >{{ guest.roomno?guest.roomno:'-' }}</ion-col>
+      <ion-col >{{ guest.fullName?guest.fullName:'-' }}</ion-col>
+      <ion-col>{{ guest.checkin_Date | date:'shortDate' }}</ion-col>
+      <ion-col>{{ guest.tariff?guest.tariff:'-' }}</ion-col>
+      <ion-col>{{ guest.guest_Balance?guest.guest_Balance:0 }}</ion-col>
+  </ion-row>
+</ion-grid>
+      </div>
 
+      <div class="empty-state-modern" *ngIf="guests.length === 0">
+        <div class="empty-icon">✅</div>
+        <p>No void transactions today</p>
+      </div>
+    </ion-card>
+  </div>
   <!-- Daily Summary Table -->
   <div class="section-container">
     <h2 class="section-title">📊 Daily Summary</h2>
@@ -165,15 +191,23 @@
       <div class="table-scroll">
         <ion-grid class="modern-table-header">
           <ion-row class="table-row">
-            <ion-col class="table-cell">Room</ion-col>
-            <ion-col class="table-cell">Description</ion-col>
-            <ion-col class="table-cell">Amount</ion-col>
-            <ion-col class="table-cell">Void #</ion-col>
+            <ion-col >Room</ion-col>
+            <ion-col >Description</ion-col>
+            <ion-col >Amount</ion-col>
+            <ion-col >Void #</ion-col>
           </ion-row>
         </ion-grid>
+        <ion-grid>
+  <ion-row  *ngFor="let item of voidTransactions">
+    <ion-col >{{ item.room }}</ion-col>
+    <ion-col >{{ item.description }}</ion-col>
+    <ion-col >${{ item.amount }}</ion-col>
+    <ion-col >{{ item.voidNo }}</ion-col>
+  </ion-row>
+</ion-grid>
       </div>
 
-      <div class="empty-state-modern">
+      <div class="empty-state-modern" *ngIf="voidTransactions.length === 0">
         <div class="empty-icon">✅</div>
         <p>No void transactions today</p>
       </div>

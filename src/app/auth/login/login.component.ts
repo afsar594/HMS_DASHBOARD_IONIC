@@ -14,23 +14,22 @@ import {
   IonCardContent,
   IonItem,
   IonInput,
-  IonButton,   
-} from '@ionic/angular/standalone';
+  IonButton, IonSpinner } from '@ionic/angular/standalone';
  @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
-   imports: [
-     IonContent,
-  IonCard,
-  IonCardHeader,
-  IonCardContent,
-  IonItem,
-  IonInput,
-  IonButton,ReactiveFormsModule],
-})
+   selector: 'app-login',
+   templateUrl: './login.component.html',
+   styleUrls: ['./login.component.scss'],
+    imports: [IonSpinner, 
+      IonContent,
+   IonCard,
+   IonCardHeader,
+   IonCardContent,
+   IonItem,
+   IonInput,
+   IonButton,ReactiveFormsModule],
+ })
 export class LoginComponent { 
-  loginForm!: FormGroup;
+  loginForm:any;
   loading = false;
 
   constructor(
@@ -91,11 +90,11 @@ export class LoginComponent {
 
   private showError(message: string) {
     this.loading = false;
-    // Ionic Toast for error
     const toast = document.createElement('ion-toast');
     toast.message = message;
     toast.duration = 3000;
     toast.color = 'danger';
+      toast.position = 'top';
     document.body.appendChild(toast);
     toast.present();
   }
