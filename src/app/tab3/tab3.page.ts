@@ -9,17 +9,45 @@ import { IonicModule } from '@ionic/angular';
 import { Chart, registerables } from 'chart.js';
 
 Chart.register(...registerables);
+import { 
+  IonContent,
+  IonHeader,
+  IonToolbar,
+   
+  IonGrid,
+  IonRow,
+  IonCol,
+  IonCard,
+  IonCardContent,
+  IonCardHeader,
+  IonCardTitle,
+   
+} from '@ionic/angular/standalone';
 // import { ExploreContainerComponent } from '../explore-container/explore-container.component';
-import { CommonModule } from '@angular/common';
+import { CommonModule, CurrencyPipe, DatePipe } from '@angular/common';
 import { ApiService } from '../api-service';
+import { ReactiveFormsModule } from '@angular/forms';
 @Component({
   selector: 'app-tab3',
   templateUrl: 'tab3.page.html',
   styleUrls: ['tab3.page.scss'],
-  standalone: true,
-
-  imports: [CommonModule, IonicModule],
-})
+    imports: [
+        CommonModule,      // for ngFor, ngIf, etc.
+    DatePipe,          // for {{ date | date }}
+    CurrencyPipe,      // for {{ value | currency }}
+    IonContent,
+    IonHeader,
+    IonToolbar,
+     
+    IonGrid,
+    IonRow,
+    IonCol,
+    IonCard,
+    IonCardContent,
+    IonCardHeader,
+    IonCardTitle,
+     ],
+ })
 export class Tab3Page implements OnDestroy {
   @ViewChild('avgChart') avgChartRef!: ElementRef<HTMLCanvasElement>;
   @ViewChild('revenueChart') revenueChartRef!: ElementRef<HTMLCanvasElement>;

@@ -6,17 +6,30 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { IonicModule } from '@ionic/angular';
-import { AuthService } from '../auth-service';
-@Component({
+ import { AuthService } from '../auth-service';
+import { 
+  IonContent,
+  IonCard,
+  IonCardHeader,
+  IonCardContent,
+  IonItem,
+  IonInput,
+  IonButton,   
+} from '@ionic/angular/standalone';
+ @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
-  standalone: true,
-
-  imports: [IonicModule],
+   imports: [
+     IonContent,
+  IonCard,
+  IonCardHeader,
+  IonCardContent,
+  IonItem,
+  IonInput,
+  IonButton,ReactiveFormsModule],
 })
-export class LoginComponent {
+export class LoginComponent { 
   loginForm!: FormGroup;
   loading = false;
 
@@ -86,4 +99,4 @@ export class LoginComponent {
     document.body.appendChild(toast);
     toast.present();
   }
-}  
+}

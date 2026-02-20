@@ -1,21 +1,19 @@
 import { Component, EnvironmentInjector, inject } from '@angular/core';
+ 
+import { addIcons } from 'ionicons';
+import { triangle, ellipse, square, logOutOutline } from 'ionicons/icons';
 import {
-  IonTabs,
+ IonTabs,
   IonTabBar,
   IonTabButton,
   IonIcon,
   IonLabel,
-} from '@ionic/angular/standalone';
-import { addIcons } from 'ionicons';
-import { triangle, ellipse, square, logOutOutline } from 'ionicons/icons';
-import {
-  IonButtons,
-  IonContent,
-  IonHeader,
-  IonMenu,
-  IonMenuButton,
-  IonTitle,
+  IonButton,
+ IonHeader,
   IonToolbar,
+  IonTitle,
+  IonContent,
+   
 } from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
@@ -24,8 +22,18 @@ import { AuthService } from '../auth/auth-service';
   selector: 'app-tabs',
   templateUrl: 'tabs.page.html',
   styleUrls: ['tabs.page.scss'],
-  standalone: true,
-  imports: [CommonModule, IonicModule],
+   imports: [IonTabs,
+  IonTabBar,
+  IonTabButton,
+  IonIcon,
+  IonLabel,
+  IonButton,
+    IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonContent,
+  IonButton,
+    ],
 })
 export class TabsPage {
   public environmentInjector = inject(EnvironmentInjector);
