@@ -5,6 +5,8 @@ const config: CapacitorConfig = {
   appName: 'hms_ionic',
   webDir: 'www',
    server: {
+    androidScheme: 'http',
+    //  url: 'http://194.233.95.37:8096/InspireHms',
     allowNavigation: [
       'http://194.233.95.37:8096/InspireHms/api/*',
      ],
