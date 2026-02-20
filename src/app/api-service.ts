@@ -12,7 +12,10 @@ export class ApiService {
     private http: HttpClient,
     private router: Router,
   ) {}
-
+  
+GetRoomGraphicalReport() {
+  return this.http.post<any>(`${this.baseUrl}RoomMaster/GetRoomGraphicalReport`,{});
+}
   GetTodayVoidTransactions() {
     return this.http.get<any>(
       `${this.baseUrl}IonicData/GetTodayVoidTransactions`,

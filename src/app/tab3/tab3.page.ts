@@ -55,6 +55,8 @@ voidTransactions: any
 
   avgChart!: Chart;
   revenueChart!: Chart;
+  roomGraphicalData: any;
+  cards: any
 
   ngAfterViewInit() {
     this.loadAvgRateChart();
@@ -93,13 +95,7 @@ voidTransactions: any
       },
     });
   }
-  cards = [
-    { title: 'Vacant', color: 'light' },
-    { title: 'Occupid', color: 'light' },
-    { title: 'Total Pax', color: 'light' },
-    { title: 'Today Checkout', color: 'light' },
-    { title: 'Zxp Arrivals', color: 'light' },
-  ];
+
 
   loadRevenueChart() {
     this.revenueChart = new Chart(this.revenueChartRef.nativeElement, {
@@ -192,6 +188,7 @@ voidTransactions: any
   { room: 204, description: 'Room Service', amount: 120, voidNo: 'V-1002' },
   { room: 305, description: 'Laundry Service', amount: 30, voidNo: 'V-1003' }
 ];
+  this.GetRoomGraphicalReport();
      this.GetCurrentGuests();
     this.GetTodayVoidTransactions();
   }
@@ -234,4 +231,45 @@ voidTransactions: any
       if (this.revenueChart) this.revenueChart.destroy();
     } catch (e) {}
   }
+
+
+GetRoomGraphicalReport() {
+
+  this.api.GetRoomGraphicalReport().subscribe({
+    next: (res: any) => {
+
+      this.roomGraphicalData = res.data;
+      const summary = this.roomGraphicalData.summary;
+
+      // 🔹 Update KPI values from summary
+      this.kpis = [
+        { title: 'Out.Bal', value: summary.outBalance },
+        { title: 'Day Rooms', value: summary.dayUseRooms },
+        { title: 'Exp.Rev', value: summary.expectedRevenue },
+        { title: 'Day Rev', value: summary.dayRevenue },
+        { title: 'Avg.Rate', value: summary.avgRate },
+        { title: 'Avg.Rate All', value: summary.avgRateAll },
+      ];
+this.cards = [
+  { title: 'Vacant', color: 'light', value: summary?.vacantRooms },
+  { title: 'Occupid', color: 'light', value: summary?.occupiedRooms },
+  { title: 'Total Pax', color: 'light', value: 0 },
+  { title: 'Today Checkout', color: 'light', value: summary?.todaysCheckouts  },
+  { title: 'Exp Arrivals', color: 'light', value: 0  },
+];
+      console.log(this.kpis);
+
+    },
+    error: (err) => {
+      console.error('Room Graphical Report Error:', err);
+    }
+  });
+}
+getOccColor(percentage: number | undefined): string {
+  if (percentage === undefined) return 'gray'; // default color
+
+  if (percentage >= 75) return 'red';      // high occupancy → red
+  if (percentage >= 50) return 'orange';   // medium → orange
+  return 'green';                           // low → green
+}
 }
