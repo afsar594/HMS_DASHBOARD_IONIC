@@ -39,7 +39,7 @@ export class TabsPage {
   public environmentInjector = inject(EnvironmentInjector);
 
   constructor(private api: AuthService) {
-    addIcons({ triangle, ellipse, square, logOutOutline });
+    addIcons({ triangle, ellipse, square, logOutOutline,powerOutline });
   }
   ngOnInit() {}
   logout() {

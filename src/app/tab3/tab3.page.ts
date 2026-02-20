@@ -51,7 +51,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 export class Tab3Page implements OnDestroy {
   @ViewChild('avgChart') avgChartRef!: ElementRef<HTMLCanvasElement>;
   @ViewChild('revenueChart') revenueChartRef!: ElementRef<HTMLCanvasElement>;
-  guests: any;
+  guests: any[] = [];
 
   avgChart!: Chart;
   revenueChart!: Chart;
@@ -187,37 +187,8 @@ export class Tab3Page implements OnDestroy {
   ];
   constructor(private api: ApiService) {}
   ngOnInit() {
-    this.guests = [
-      {
-        roomNo: '101',
-        name: 'John Doe',
-        checkInDate: new Date('2026-02-15'),
-        tariff: 120,
-        balance: 50,
-      },
-      {
-        roomNo: '102',
-        name: 'Jane Smith',
-        checkInDate: new Date('2026-02-16'),
-        tariff: 150,
-        balance: 0,
-      },
-      {
-        roomNo: '103',
-        name: 'Michael Brown',
-        checkInDate: new Date('2026-02-17'),
-        tariff: 200,
-        balance: 30,
-      },
-      {
-        roomNo: '104',
-        name: 'Alice Johnson',
-        checkInDate: new Date('2026-02-18'),
-        tariff: 180,
-        balance: 20,
-      },
-    ];
-    // this.GetCurrentGuests();
+ 
+     this.GetCurrentGuests();
     this.GetTodayVoidTransactions();
   }
   GetCurrentGuests() {

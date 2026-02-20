@@ -73,24 +73,20 @@
       <div class="table-scroll">
         <ion-grid>
           <!-- Table Header -->
-          <ion-row class="table-row header-row">
-            <ion-col class="table-cell">Room No</ion-col>
-            <ion-col class="table-cell">Guest Name</ion-col>
-            <ion-col class="table-cell">Check-in Date</ion-col>
-            <ion-col class="table-cell">Tariff</ion-col>
-            <ion-col class="table-cell">Balance</ion-col>
+          <ion-row >
+            <ion-col >Room No</ion-col>
+            <ion-col >Guest Name</ion-col>
+            <ion-col >Check-in Date</ion-col>
+            <ion-col >Tariff</ion-col>
+            <ion-col >Balance</ion-col>
           </ion-row>
-
-          <!-- Table Rows with Dummy Data -->
-          <ion-row class="table-row" *ngFor="let guest of guests">
-            <ion-col class="table-cell">{{ guest.roomNo }}</ion-col>
-            <ion-col class="table-cell">{{ guest.name }}</ion-col>
-            <ion-col class="table-cell"
-              >{{ guest.checkInDate | date:'shortDate' }}</ion-col
-            >
-            <ion-col class="table-cell">{{ guest.tariff | currency }}</ion-col>
-            <ion-col class="table-cell">{{ guest.balance | currency }}</ion-col>
-          </ion-row>
+           <ion-row  *ngFor="let guest of guests">
+      <ion-col >{{ guest.roomno?guest.roomno:'-' }}</ion-col>
+      <ion-col >{{ guest.fullName?guest.fullName:'-' }}</ion-col>
+      <ion-col>{{ guest.checkin_Date | date:'shortDate' }}</ion-col>
+      <ion-col>{{ guest.tariff?guest.tariff:'-' }}</ion-col>
+      <ion-col>{{ guest.guest_Balance?guest.guest_Balance:0 }}</ion-col>
+    </ion-row>
         </ion-grid>
       </div>
 
