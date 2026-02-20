@@ -1,7 +1,7 @@
 import { Component, EnvironmentInjector, inject } from '@angular/core';
  
 import { addIcons } from 'ionicons';
-import { triangle, ellipse, square, logOutOutline } from 'ionicons/icons';
+import { triangle, ellipse, square, logOutOutline, powerOutline } from 'ionicons/icons';
 import {
  IonTabs,
   IonTabBar,
