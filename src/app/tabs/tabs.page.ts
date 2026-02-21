@@ -22,6 +22,9 @@ import {
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { AuthService } from '../auth/auth-service';
+import { Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
+
 @Component({
   selector: 'app-tabs',
   templateUrl: 'tabs.page.html',
@@ -41,13 +44,34 @@ import { AuthService } from '../auth/auth-service';
 export class TabsPage {
   public environmentInjector = inject(EnvironmentInjector);
 
-  constructor(private api: AuthService) {
+  constructor(private api: AuthService, private router: Router, private alertCtrl: AlertController,) {
     addIcons({ triangle, ellipse, square, logOutOutline, powerOutline });
   }
   ngOnInit() {}
-  logout() {
-    this.api.logout();
-  }
+async logout() {
+
+  const alert = await this.alertCtrl.create({
+    header: 'Confirm Logout',
+    message: 'Are you sure you want to logout?',
+    buttons: [
+      {
+        text: 'Cancel',
+        role: 'cancel'
+      },
+      {
+        text: 'Logout',
+        role: 'confirm',
+        handler: () => {
+          localStorage.clear();
+          this.api.logout();
+          this.router.navigate(['/auth/login'], { replaceUrl: true });
+        }
+      }
+    ]
+  });
+
+  await alert.present();
+}
   cards = [
     {
       title: 'Vacant',

@@ -22,7 +22,7 @@
     <path
       class="circle"
       [attr.stroke]="getOccColor(roomGraphicalData?.summary?.occupancyPercentage)"
-      [attr.stroke-dasharray]="roomGraphicalData.summary?.occupancyPercentage + ', 100'"
+      [attr.stroke-dasharray]="roomGraphicalData?.summary?.occupancyPercentage + ', 100'"
       d="M18 2.0845
          a 15.9155 15.9155 0 0 1 0 31.831
          a 15.9155 15.9155 0 0 1 0 -31.831"
@@ -35,8 +35,8 @@
       class="percentage" 
       text-anchor="middle" 
       alignment-baseline="middle"
-      [attr.font-size]="roomGraphicalData.summary?.occupancyPercentage > 99 ? '6' : '8'">
-      {{ roomGraphicalData.summary?.occupancyPercentage | number:'1.0-0' }}%
+      [attr.font-size]="roomGraphicalData?.summary?.occupancyPercentage > 99 ? '6' : '8'">
+      {{ roomGraphicalData?.summary?.occupancyPercentage | number:'1.0-0' }}%
     </text>
   </svg>
 </div>

@@ -15,6 +15,7 @@ import {
   IonItem,
   IonInput,
   IonButton, IonSpinner } from '@ionic/angular/standalone';
+import { CommonModule } from '@angular/common';
  @Component({
    selector: 'app-login',
    templateUrl: './login.component.html',
@@ -26,6 +27,8 @@ import {
    IonCardContent,
    IonItem,
    IonInput,
+       CommonModule,   // ✅ MUST
+
    IonButton,ReactiveFormsModule],
  })
 export class LoginComponent { 

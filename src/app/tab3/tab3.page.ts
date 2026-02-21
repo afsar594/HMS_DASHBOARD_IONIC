@@ -32,7 +32,8 @@ import { ReactiveFormsModule } from '@angular/forms';
   templateUrl: 'tab3.page.html',
   styleUrls: ['tab3.page.scss'],
     imports: [
-        CommonModule,      // for ngFor, ngIf, etc.
+            CommonModule  // ✅ MUST
+,      // for ngFor, ngIf, etc.
     DatePipe,          // for {{ date | date }}
      IonContent,
     IonHeader,
@@ -239,15 +240,15 @@ GetRoomGraphicalReport() {
     next: (res: any) => {
 
       this.roomGraphicalData = res.data;
-      const summary = this.roomGraphicalData.summary;
+      const summary = this.roomGraphicalData.summary?this.roomGraphicalData.summary:0;
 
       // 🔹 Update KPI values from summary
       this.kpis = [
-        { title: 'Out.Bal', value: summary.outBalance },
-        { title: 'Day Rooms', value: summary.dayUseRooms },
-        { title: 'Exp.Rev', value: summary.expectedRevenue },
-        { title: 'Day Rev', value: summary.dayRevenue },
-        { title: 'Avg.Rate', value: summary.avgRate },
+        { title: 'Out.Bal', value: summary?.outBalance },
+        { title: 'Day Rooms', value: summary?.dayUseRooms },
+        { title: 'Exp.Rev', value: summary?.expectedRevenue },
+        { title: 'Day Rev', value: summary?.dayRevenue },
+        { title: 'Avg.Rate', value: summary?.avgRate },
         { title: 'Avg.Rate All', value: summary.avgRateAll },
       ];
 this.cards = [
