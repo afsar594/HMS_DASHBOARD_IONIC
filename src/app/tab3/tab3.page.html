@@ -126,53 +126,74 @@
   <div class="section-container">
     <h2 class="section-title">👥 Current Guests</h2>
     <ion-card class="modern-card">
-      <div class="table-scroll">
-        <ion-grid class="modern-table-header">
-          <ion-row class="table-row">
-           <ion-col >Room No</ion-col>
-            <ion-col >Guest Name</ion-col>
-            <ion-col >Check-in Date</ion-col>
-            <ion-col >Tariff</ion-col>
-            <ion-col >Balance</ion-col>
-          </ion-row>
-        </ion-grid>
-        <ion-grid>
-  <ion-row  *ngFor="let guest of guests">
-       <ion-col >{{ guest.roomno?guest.roomno:'-' }}</ion-col>
-      <ion-col >{{ guest.fullName?guest.fullName:'-' }}</ion-col>
+     <div class="table-scroll">
+  <ion-grid class="modern-table-header">
+    <ion-row class="table-row">
+      <ion-col>Room No</ion-col>
+      <ion-col>Guest Name</ion-col>
+      <ion-col>Check-in Date</ion-col>
+      <ion-col class="text-right">Tariff</ion-col>
+      <ion-col class="text-right">Balance</ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid>
+    <ion-row *ngFor="let guest of guests">
+      <ion-col>{{ guest.roomno ? guest.roomno : '-' }}</ion-col>
+      <ion-col>{{ guest.fullName ? guest.fullName : '-' }}</ion-col>
       <ion-col>{{ guest.checkin_Date | date:'shortDate' }}</ion-col>
-      <ion-col>{{ guest.room_Charge?guest.room_Charge.toFixed(2):'-' }}</ion-col>
-      <ion-col>{{ guest.guest_Balance?guest.guest_Balance.toFixed(2):0 }}</ion-col>
-  </ion-row>
-</ion-grid>
-      </div>
+
+      <ion-col class="text-right">
+        {{ guest.room_Charge ? guest.room_Charge.toFixed(2) : '-' }}
+      </ion-col>
+
+      <ion-col class="text-right">
+        {{ guest.guest_Balance ? guest.guest_Balance.toFixed(2) : '0.00' }}
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</div>
 
       <div class="empty-state-modern" *ngIf="guests.length === 0">
         <div class="empty-icon">✅</div>
-        <p>No void transactions today</p>
+        <p>No Guest</p>
       </div>
     </ion-card>
   </div>
   <div class="section-container">
     <h2 class="section-title">📊 Daily Summary</h2>
     <ion-card class="modern-card table-card">
-      <div class="table-scroll">
-        <ion-grid class="modern-table-header">
-          <ion-row class="table-row">
-            <ion-col class="table-cell">Date</ion-col>
-            <ion-col class="table-cell">Rooms Reserved</ion-col>
-            <ion-col class="table-cell">Other</ion-col>
-            <ion-col class="table-cell">Cash</ion-col>
-            <ion-col class="table-cell">Card</ion-col>
-            <ion-col class="table-cell">Occupancy</ion-col>
-            <ion-col class="table-cell">Avg Rate</ion-col>
-            <ion-col class="table-cell">Check-in</ion-col>
-            <ion-col class="table-cell">Check-out</ion-col>
-          </ion-row>
-        </ion-grid>
-      </div>
+     <div class="table-scroll">
+  <ion-grid class="modern-table-header">
+    <ion-row class="table-row">
+      <ion-col class="table-cell">Date</ion-col>
+      <ion-col class="table-cell text-right">Rooms Reserved</ion-col>
+      <ion-col class="table-cell text-right">Other</ion-col>
+      <ion-col class="table-cell text-right">Cash</ion-col>
+      <ion-col class="table-cell text-right">Card</ion-col>
+      <ion-col class="table-cell text-right">Occupancy</ion-col>
+      <ion-col class="table-cell text-right">Avg Rate</ion-col>
+      <ion-col class="table-cell text-right">Check-in</ion-col>
+      <ion-col class="table-cell text-right">Check-out</ion-col>
+    </ion-row>
+  </ion-grid>
 
-      <div class="empty-state-modern">
+  <ion-grid>
+    <ion-row *ngFor="let data of dailysummery">
+      <ion-col>{{ data?.date | date:'shortDate' }}</ion-col>
+
+      <ion-col class="text-right">{{ data?.roomReserved ? data.roomReserved : 0 }}</ion-col>
+      <ion-col class="text-right">{{ data?.cash ? data.cash : 0 }}</ion-col>
+      <ion-col class="text-right">{{ data?.card ? data.card : 0 }}</ion-col>
+      <ion-col class="text-right">{{ data?.occupancy ? data.occupancy : 0 }}</ion-col>
+      <ion-col class="text-right">{{ data?.avgRate ? data.avgRate : 0 }}</ion-col>
+      <ion-col class="text-right">{{ data?.checkIn ? data.checkIn : 0 }}</ion-col>
+      <ion-col class="text-right">{{ data?.checkOut ? data.checkOut : 0 }}</ion-col>
+    </ion-row>
+  </ion-grid>
+</div>
+
+      <div class="empty-state-modern" *ngIf="dailysummery?.length === 0">
         <div class="empty-icon">📅</div>
         <p>No daily data available</p>
       </div>

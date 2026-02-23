@@ -59,6 +59,7 @@ voidTransactions: any
   roomGraphicalData: any;
   cards: any
   kpis: any
+  dailysummery: any;
   ngAfterViewInit() {
     // this.loadAvgRateChart();
     // this.loadRevenueChart();
@@ -182,6 +183,7 @@ voidTransactions: any
      this.GetCurrentGuests();
     this.GetTodayVoidTransactions();
      this.loadAnalytics(); 
+     this.GetDailySummaryData()
   }
   GetCurrentGuests() {
     this.api.GetCurrentGuests().subscribe(
@@ -372,6 +374,10 @@ updateRevenueChart() {
       }
     });
   }
-
+GetDailySummaryData(){
+  this.api.GetDailySummaryData().subscribe((res:any)=>{
+   this. dailysummery=res.data
+  })
+}
 
 }
