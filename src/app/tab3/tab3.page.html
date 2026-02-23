@@ -124,7 +124,7 @@
     </ion-card>
   </div> -->
   <div class="section-container">
-    <h2 class="section-title">🗑️ Void Transactions Today</h2>
+    <h2 class="section-title">👥 Current Guests</h2>
     <ion-card class="modern-card">
       <div class="table-scroll">
         <ion-grid class="modern-table-header">
@@ -235,7 +235,7 @@
 </ion-grid>
       </div>
 
-      <div class="empty-state-modern" *ngIf="voidTransactions.length === 0">
+      <div class="empty-state-modern" *ngIf="voidTransactions?.length === 0">
         <div class="empty-icon">✅</div>
         <p>No void transactions today</p>
       </div>

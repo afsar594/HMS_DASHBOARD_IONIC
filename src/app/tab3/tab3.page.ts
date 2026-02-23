@@ -53,85 +53,86 @@ voidTransactions: any
   @ViewChild('avgChart') avgChartRef!: ElementRef<HTMLCanvasElement>;
   @ViewChild('revenueChart') revenueChartRef!: ElementRef<HTMLCanvasElement>;
   guests: any[] = [];
-
+  analyticsData: any[] = [];
   avgChart!: Chart;
   revenueChart!: Chart;
   roomGraphicalData: any;
   cards: any
-
+  kpis: any
   ngAfterViewInit() {
-    this.loadAvgRateChart();
-    this.loadRevenueChart();
+    // this.loadAvgRateChart();
+    // this.loadRevenueChart();
     // ensure charts resize after initial layout
+      this.loadAnalytics();
     setTimeout(() => this.resizeCharts(), 300);
   }
 
-  loadAvgRateChart() {
-    this.avgChart = new Chart(this.avgChartRef.nativeElement, {
-      type: 'line',
-      data: {
-        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-        datasets: [
-          {
-            label: 'Avg Rate',
-            data: [3200, 3400, 3100, 3600, 3800, 4000, 3900],
-            borderColor: '#6366f1',
-            backgroundColor: 'rgba(99,102,241,0.2)',
-            tension: 0.4,
-            fill: true,
-            pointRadius: 4,
-          },
-        ],
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        scales: {
-          y: {
-            ticks: {
-              callback: (value) => '₹' + value,
-            },
-          },
-        },
-      },
-    });
-  }
+  // loadAvgRateChart() {
+  //   this.avgChart = new Chart(this.avgChartRef.nativeElement, {
+  //     type: 'line',
+  //     data: {
+  //       labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+  //       datasets: [
+  //         {
+  //           label: 'Avg Rate',
+  //           data: [3200, 3400, 3100, 3600, 3800, 4000, 3900],
+  //           borderColor: '#6366f1',
+  //           backgroundColor: 'rgba(99,102,241,0.2)',
+  //           tension: 0.4,
+  //           fill: true,
+  //           pointRadius: 4,
+  //         },
+  //       ],
+  //     },
+  //     options: {
+  //       responsive: true,
+  //       maintainAspectRatio: false,
+  //       scales: {
+  //         y: {
+  //           ticks: {
+  //             callback: (value) => '₹' + value,
+  //           },
+  //         },
+  //       },
+  //     },
+  //   });
+  // }
 
 
-  loadRevenueChart() {
-    this.revenueChart = new Chart(this.revenueChartRef.nativeElement, {
-      type: 'bar',
-      data: {
-        labels: ['Cash', 'Card', 'UPI', 'Online'],
-        datasets: [
-          {
-            label: 'Revenue',
-            data: [120000, 98000, 45000, 76000],
-            backgroundColor: ['#22c55e', '#3b82f6', '#a855f7', '#f59e0b'],
-            borderRadius: 6,
-          },
-        ],
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: {
-            display: true,
-            position: 'top',
-          },
-        },
-        scales: {
-          y: {
-            beginAtZero: true,
-            ticks: {
-              callback: (value) => '₹' + value,
-            },
-          },
-        },
-      },
-    });
-  }
+  // loadRevenueChart() {
+  //   this.revenueChart = new Chart(this.revenueChartRef.nativeElement, {
+  //     type: 'bar',
+  //     data: {
+  //       labels: ['Cash', 'Card', 'UPI', 'Online'],
+  //       datasets: [
+  //         {
+  //           label: 'Revenue',
+  //           data: [120000, 98000, 45000, 76000],
+  //           backgroundColor: ['#22c55e', '#3b82f6', '#a855f7', '#f59e0b'],
+  //           borderRadius: 6,
+  //         },
+  //       ],
+  //     },
+  //     options: {
+  //       responsive: true,
+  //       maintainAspectRatio: false,
+  //       plugins: {
+  //         legend: {
+  //           display: true,
+  //           position: 'top',
+  //         },
+  //       },
+  //       scales: {
+  //         y: {
+  //           beginAtZero: true,
+  //           ticks: {
+  //             callback: (value) => '₹' + value,
+  //           },
+  //         },
+  //       },
+  //     },
+  //   });
+  // }
 
   @HostListener('window:resize')
   onWindowResize() {
@@ -147,14 +148,7 @@ voidTransactions: any
     }
   }
 
-  kpis = [
-    { title: 'Out.Bal', value: 0 },
-    { title: 'Day Rooms', value: 0 },
-    { title: 'Exp.Rev', value: 0 },
-    { title: 'Day Rev', value: 0 },
-    { title: 'Avg.Rate', value: 0 },
-    { title: 'Avg.Rate All', value: 0 },
-  ];
+
 
   filters = [
     'Vacant Rooms',
@@ -184,21 +178,16 @@ voidTransactions: any
   ];
   constructor(private api: ApiService) {}
   ngOnInit() {
-   this.voidTransactions = [
-  { room: 101, description: 'Mini Bar Charge', amount: 45, voidNo: 'V-1001' },
-  { room: 204, description: 'Room Service', amount: 120, voidNo: 'V-1002' },
-  { room: 305, description: 'Laundry Service', amount: 30, voidNo: 'V-1003' }
-];
   this.GetRoomGraphicalReport();
      this.GetCurrentGuests();
     this.GetTodayVoidTransactions();
+     this.loadAnalytics(); 
   }
   GetCurrentGuests() {
     this.api.GetCurrentGuests().subscribe(
       (res) => {
         if (res.isSuccess && res.data) {
-          this.guests = res.data; // populate table with API response
-          console.log('guest', this.guests);
+          this.guests = res.data; 
         } else {
           this.guests = [];
         }
@@ -211,8 +200,8 @@ voidTransactions: any
   }
   GetTodayVoidTransactions() {
     this.api.GetTodayVoidTransactions().subscribe((res) => {
-      console.log('response of void transection', res);
-    });
+  this.voidTransactions = res.data;
+  });
   }
 
   getCardIcon(title: string): string {
@@ -267,10 +256,122 @@ this.cards = [
   });
 }
 getOccColor(percentage: number | undefined): string {
-  if (percentage === undefined) return 'gray'; // default color
+  if (percentage === undefined) return 'gray'; 
 
-  if (percentage >= 75) return 'red';      // high occupancy → red
-  if (percentage >= 50) return 'orange';   // medium → orange
-  return 'green';                           // low → green
+  if (percentage >= 75) return 'red';     
+  if (percentage >= 50) return 'orange';  
+  return 'green';                         
 }
+
+ loadAnalytics() {
+  this.api.GetGraphsPercentageData().subscribe((res: any) => {
+    if (res?.isSuccess && res?.data) {
+      this.analyticsData = res.data;
+
+      this.updateAvgRateChart();
+      this.updateRevenueChart();
+    }
+  });
+}
+updateAvgRateChart() {
+
+  const labels = this.analyticsData.map(x => x.date);
+  const data = this.analyticsData.map(x => x.avgRate);
+
+  if (this.avgChart) this.avgChart.destroy();
+
+  this.avgChart = new Chart(this.avgChartRef.nativeElement, {
+    type: 'line',
+    data: {
+      labels: labels,
+      datasets: [{
+        label: 'Avg Rate',
+        data: data,
+        borderColor: '#6366f1',
+        backgroundColor: 'rgba(99,102,241,0.2)',
+        tension: 0.4,
+        fill: true,
+        pointRadius: 4,
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false
+    }
+  });
+
+}
+updateRevenueChart() {
+
+  const labels = this.analyticsData.map(x => x.date);
+  const data = this.analyticsData.map(x => x.totalRevenue);
+
+  if (this.revenueChart) this.revenueChart.destroy();
+
+  this.revenueChart = new Chart(this.revenueChartRef.nativeElement, {
+    type: 'bar',
+    data: {
+      labels: labels,
+      datasets: [{
+        label: 'Revenue',
+        data: data,
+        backgroundColor: '#22c55e',
+        borderRadius: 6,
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false
+    }
+  });
+
+}
+  createCharts() {
+    if (!this.analyticsData.length) return;
+
+    const labels = this.analyticsData.map(x => x.date);
+    const avgRates = this.analyticsData.map(x => x.avgRate);
+    const revenues = this.analyticsData.map(x => x.totalRevenue);
+
+    if (this.avgChart) this.avgChart.destroy();
+    if (this.revenueChart) this.revenueChart.destroy();
+
+    this.avgChart = new Chart(this.avgChartRef.nativeElement, {
+      type: 'line',
+      data: {
+        labels,
+        datasets: [{
+          label: 'Average Rate',
+          data: avgRates,
+          borderColor: '#6366f1',
+          backgroundColor: 'rgba(99,102,241,0.2)',
+          tension: 0.4,
+          fill: true,
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false
+      }
+    });
+
+    this.revenueChart = new Chart(this.revenueChartRef.nativeElement, {
+      type: 'bar',
+      data: {
+        labels,
+        datasets: [{
+          label: 'Revenue',
+          data: revenues,
+          backgroundColor: '#22c55e',
+          borderRadius: 6
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false
+      }
+    });
+  }
+
+
 }

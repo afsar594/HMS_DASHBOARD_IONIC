@@ -48,7 +48,7 @@ export class TabsPage {
     addIcons({ triangle, ellipse, square, logOutOutline, powerOutline });
   }
   ngOnInit() {}
-async logout() {
+  async logout() {
 
   const alert = await this.alertCtrl.create({
     header: 'Confirm Logout',

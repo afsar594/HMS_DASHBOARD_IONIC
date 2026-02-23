@@ -16,6 +16,10 @@ export class ApiService {
 GetRoomGraphicalReport() {
   return this.http.post<any>(`${this.baseUrl}RoomMaster/GetRoomGraphicalReport`,{});
 }
+GetGraphsPercentageData() {
+  return this.http.get<any>(`${this.baseUrl}IonicData/GetGraphsPercentageData
+`);
+}
   GetTodayVoidTransactions() {
     return this.http.get<any>(
       `${this.baseUrl}IonicData/GetTodayVoidTransactions`,
