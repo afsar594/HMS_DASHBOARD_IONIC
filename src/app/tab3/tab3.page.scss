@@ -187,11 +187,16 @@
 }
 
 .modern-content {
-  --background: #f8fafc;
+  --background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
   --padding-start: 0;
   --padding-end: 0;
   --padding-top: 0;
   --padding-bottom: 0;
+}
+
+/* add splashy toolbar gradient for header */
+.top-toolbar {
+  --background: linear-gradient(90deg, #3f74b5 0%, #6c63ff 100%);
 }
 
 .stats-section {
@@ -209,7 +214,7 @@
 ion-card.stat-card {
   /* keep ion-card background/color from Ionic `color` attribute */
   border-radius: 16px;
-  padding: 20px 16px;
+  padding: 5px 5px;
   text-align: center;
   transition: all 0.3s ease;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
@@ -229,11 +234,11 @@ ion-card.stat-card {
   }
 
   .stat-icon {
-    font-size: 32px;
+    font-size: 24px;
   }
 
   .stat-label {
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 600;
     color: inherit; /* use card color's contrast */
   }
@@ -279,6 +284,7 @@ ion-card.stat-card {
     display: flex;
     align-items: center;
     gap: 8px;
+    margin-left: 18px;
   }
 }
 
@@ -293,105 +299,8 @@ ion-card.stat-card {
   }
 }
 
-/* ============================= */
-/* MODERN CARDS */
-/* ============================= */
-.modern-card {
-  border-radius: 16px;
-  margin: 0 0 20px 0;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-  border: 1px solid #e2e8f0;
-  overflow: hidden;
-  background: #ffffff;
-  --background: #ffffff;
-
-  ion-card-header {
-    background: #f8fafc;
-    border-bottom: 1px solid #e2e8f0;
-    padding: 16px;
-
-    ion-card-title {
-      margin: 0;
-      font-size: 16px;
-      font-weight: 700;
-      color: #1e293b;
-    }
-  }
-
-  ion-card-content {
-    padding: 0;
-    height: auto !important;
-  }
-}
-
-.table-card {
-  margin-left: 16px;
-  margin-right: 16px;
-}
-
 ion-card {
   margin: 0 16px 20px 16px;
-}
-
-/* ============================= */
-/* TABLE STYLING */
-/* ============================= */
-.modern-table-header {
-  padding: 0;
-  background: linear-gradient(90deg, #3f74b5, #2d5a8f);
-  color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-  display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: minmax(140px, 1fr);
-  width: 100%;
-  min-width: max-content; /* force overflow on small screens */
-}
-
-.table-row {
-  padding: 0;
-  display: contents;
-}
-
-.table-cell {
-  padding: 14px 18px;
-  font-weight: 600;
-  font-size: 12px;
-  white-space: nowrap;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  color: #fff;
-  display: flex;
-  align-items: center;
-  border-right: 1px solid rgba(255, 255, 255, 0.1);
-  min-width: 140px; /* ensure cells don't shrink below this */
-}
-
-.table-cell:last-child {
-  border-right: none;
-}
-
-.table-scroll {
-  overflow-x: auto;
-  width: 100%;
-  -webkit-overflow-scrolling: touch;
-
-  &::-webkit-scrollbar {
-    height: 6px;
-  }
-
-  &::-webkit-scrollbar-track {
-    background: #f8fafc;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: #e2e8f0;
-    border-radius: 3px;
-
-    &:hover {
-      background: #cbd5e1;
-    }
-  }
 }
 
 /* ============================= */
@@ -622,8 +531,7 @@ ion-card {
 }
 
 .kpi-card,
-.stat-card,
-.modern-card {
+.stat-card {
   animation: slideUp 0.4s ease-out;
 }
 
@@ -693,13 +601,15 @@ ion-checkbox {
     }
   }
 
-  .section-container,
   .charts-section,
   .kpi-section {
     padding-left: 16px;
     padding-right: 16px;
   }
-
+  .section-container {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
   ion-card {
     margin-left: 16px;
     margin-right: 16px;
@@ -749,7 +659,7 @@ ion-checkbox {
 /* Stat Card */
 .stat-card {
   border-radius: 14px;
-  height: 130px;
+  height: 120px;
   width: 100%;
   display: flex;
   align-items: center;
@@ -771,7 +681,7 @@ ion-checkbox {
 
 /* Icon */
 .stat-icon {
-  font-size: 30px;
+  font-size: 22px;
   margin-bottom: 10px;
 }
 
@@ -799,81 +709,11 @@ ion-checkbox {
 /* Small Mobile */
 @media (max-width: 480px) {
   .stat-card {
-    height: 80px;
+    height: 90px;
+    width: 128px;
   }
 }
 
-// .responsive-card {
-//   height: 70px;
-//   width: 170px;
-//   border-radius: 12px;
-// }
-
-//  .cards-row {
-//   padding: 0;
-//   margin: 12px auto;
-//   max-width: 1520px;
-// }
-
-// .cards-row ion-row {
-//   display: flex;
-//   flex-wrap: wrap;
-//   justify-content: center;
-// //   gap: 14px;
-//   align-items: stretch;
-//   overflow-x: hidden;
-// }
-
-// .cards-row ion-col {
-//   flex: 0 0 220px;
-//   max-width: 220px;
-//   padding: 0 6px;
-//   box-sizing: border-box;
-// }
-// .room-card {
-//   border-radius: 14px;
-//   padding-bottom: 6px;
-// }
-// @media (max-width: 900px) {
-//   .cards-row ion-col {
-//     flex: 0 0 calc(50% - 12px);
-//     max-width: calc(50% - 12px);
-//   }
-// }
-
-// @media (max-width: 480px) {
-//   .cards-row ion-col {
-//     /* force two columns on small mobile, override Ionic column sizes */
-//     flex: 0 0 calc(50% - 12px) !important;
-//     max-width: calc(50% - 12px) !important;
-//     width: calc(50% - 12px) !important;
-//     box-sizing: border-box !important;
-//     padding: 0 6px !important;
-//   }
-
-//   .cards-row ion-row {
-//     padding: 0px 0px;
-//   }
-// }
-// .card-center {
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-//   height: 100%;
-//   font-size: 14px;
-//   font-weight: 600;
-//   text-align: center;
-// }
-
-//  @media (min-width: 768px) {
-//   .responsive-card {
-//     height: 110px;
-//   }
-
-//   .card-center {
-//     font-size: 16px;
-//   }
-// }
 .chart {
   height: auto;
   /* Chart container sizes per breakpoint */
@@ -917,35 +757,230 @@ ion-checkbox {
   }
 }
 
-/* Additional small-screen header/card height tweaks */
-@media (max-width: 420px) {
-  /* Reduce padding on card headers so header cards appear smaller on mobile */
-  .modern-card ion-card-header,
-  ion-card .chart-header,
-  ion-card .brand {
-    padding-top: 8px !important;
-    padding-bottom: 8px !important;
-  }
+/* container styling for scrollable tables */
+.table-scroll {
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  overflow-x: auto;
+}
+.table-scroll::-webkit-scrollbar {
+  height: 6px;
+}
+.table-scroll::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
 
-  .modern-card ion-card-header ion-card-title,
-  ion-card .chart-header ion-card-title {
-    font-size: 14px !important;
-  }
+/* Make table-like layout for the scrollable grids and headers
+   Use a fixed table layout so column widths remain consistent and compact. */
+.modern-table-header,
+.table-scroll ion-grid {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+}
 
-  /* Tighter spacing for the card content */
-  .modern-card ion-card-content,
-  .modern-card ion-card-header {
-    padding-left: 12px !important;
-    padding-right: 12px !important;
-  }
+.modern-table-header ion-row,
+.table-scroll ion-row {
+  display: table-row;
+}
 
-  /* Reduce table header height */
-  .modern-table-header {
-    grid-auto-columns: minmax(110px, 1fr) !important;
-  }
+.modern-table-header ion-col,
+.table-scroll ion-col {
+  display: table-cell;
+  padding: 8px 8px;
+  vertical-align: middle;
+  font-size: 13px;
+  border-bottom: 1px solid #e6eef6;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
-  /* Slightly reduce overall card radii for compact look */
-  .modern-card {
-    border-radius: 12px;
-  }
+/* header cells get a light background and bold text */
+.modern-table-header ion-col {
+  background: #f1f5f9;
+  font-weight: 600;
+}
+
+/* alternating row colors + hover highlight */
+.table-scroll ion-row:nth-child(even) {
+  background: #fafbfc;
+}
+.table-scroll ion-row:hover {
+  background: #e2e8f0;
+}
+
+/* Narrower column widths (tweak values as needed) */
+.modern-table-header ion-col:nth-child(1),
+.table-scroll ion-col:nth-child(1) {
+  width: 64px; /* small first column (Room/Room No) */
+}
+
+.modern-table-header ion-col:nth-child(2),
+.table-scroll ion-col:nth-child(2) {
+  width: 140px; /* Guest / Description */
+}
+
+.modern-table-header ion-col:nth-child(3),
+.table-scroll ion-col:nth-child(3) {
+  width: 110px; /* Check-in / Amount */
+}
+
+.modern-table-header ion-col:nth-child(4),
+.table-scroll ion-col:nth-child(4) {
+  width: 90px; /* Tariff / Void # */
+  text-align: right;
+}
+
+.modern-table-header ion-col:nth-child(5),
+.table-scroll ion-col:nth-child(5) {
+  width: 90px; /* Balance / other small cols */
+}
+// }
+
+// .modern-table-header ion-col:nth-child(5),
+
+/* add base styling for "modern-card" to give a softer, elevated look */
+.modern-card {
+  border-radius: 18px;
+  background: #ffffff;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+  transition:
+    transform 0.3s,
+    box-shadow 0.3s;
+}
+.modern-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* decorate section titles with underline and icon spacing */
+.section-title {
+  position: relative;
+}
+.section-title:before {
+  content: "";
+  position: absolute;
+  left: -18px;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(180deg, #3f74b5, #6c63ff);
+  border-radius: 2px;
+}
+
+// .table-scroll ion-col:nth-child(5) {
+//   width: 100px; /* Balance */
+//   text-align: right;
+// }
+
+// /* ✅ Column Header Background */
+// .modern-table-header {
+//   background: #3f74b5;
+//   font-weight: 600;
+//   color: #f8fafc;
+//   border-bottom: 2px solid #cbd5e1;
+// }
+
+// /* Zebra rows */*
+// .table-scroll ion-row:nth-child(even) {
+//   background: #f8fafc;
+// }
+
+// /* Scroll if overflow */
+// .table-scroll {
+//   overflow-x: auto;
+// }
+/* ================================
+   GLOBAL IONIC TABLE ENHANCEMENT
+   ================================ */
+
+/* Scroll wrapper (already working) */
+/* ===============================
+   UNIVERSAL IONIC TABLE STYLE
+   =============================== */
+
+/* Scroll wrapper */
+.table-scroll {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 12px;
+}
+
+/* Prevent wrapping */
+.table-scroll ion-row {
+  flex-wrap: nowrap;
+}
+
+/* Allow table to expand wider than screen */
+// .table-scroll ion-grid {
+//   min-width: max-content;
+// }
+
+/* ===============================
+   COLUMN STYLE
+   =============================== */
+
+.table-scroll ion-col {
+  flex: 0 0 auto;
+  white-space: nowrap;
+  padding: 10px 10px;
+  font-size: 14px;
+  color: #334155; /* Normal text color */
+  border-bottom: 1px solid #e2e8f0;
+  text-align: center;
+}
+
+/* ===============================
+   FULL HEADER BACKGROUND FIX
+   =============================== */
+
+.modern-table-header ion-row {
+  background: linear-gradient(135deg, #3f74b5, #4f8bd6);
+  // min-width: max-content;
+}
+
+.modern-table-header ion-col {
+  color: #ffffff;
+  background: #3f74b5;
+  font-weight: 600;
+  border-bottom: none;
+}
+
+/* ===============================
+   COLUMN WIDTH CONTROL
+   =============================== */
+
+.table-scroll ion-col:nth-child(1) {
+  min-width: 10px;
+}
+
+.table-scroll ion-col:nth-child(2),
+.table-scroll ion-col:nth-child(3) {
+  min-width: 70px;
+}
+
+.table-scroll ion-col:nth-child(4),
+.table-scroll ion-col:nth-child(5) {
+  min-width: 90px;
+}
+
+.table-scroll ion-col:nth-child(n + 6) {
+  min-width: 90px;
+}
+
+/* ===============================
+   ROW EFFECTS
+   =============================== */
+
+/* Zebra striping (only body rows) */
+.table-scroll ion-grid:not(.modern-table-header) ion-row:nth-child(even) {
+  background: #ffffff;
+}
+
+/* Hover effect */
+.table-scroll ion-grid:not(.modern-table-header) ion-row:hover {
+  background: #3f74b5;
 }

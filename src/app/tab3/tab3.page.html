@@ -7,39 +7,41 @@
             <div class="kpi-title">{{ kpi.title }}</div>
             <div class="kpi-value">{{ kpi.value }}</div>
           </div>
-<div class="kpi-card occ-card">
-  <div class="kpi-title">Occ. %</div>
-  <svg class="occ-circle" viewBox="0 0 36 36">
-    <path
-      class="circle-bg"
-      d="M18 2.0845
+          <div class="kpi-card occ-card">
+            <div class="kpi-title">Occ. %</div>
+            <svg class="occ-circle" viewBox="0 0 36 36">
+              <path
+                class="circle-bg"
+                d="M18 2.0845
          a 15.9155 15.9155 0 0 1 0 31.831
          a 15.9155 15.9155 0 0 1 0 -31.831"
-      fill="none"
-      stroke="#eee"
-      stroke-width="3.8"
-    />
-    <path
-      class="circle"
-      [attr.stroke]="getOccColor(roomGraphicalData?.summary?.occupancyPercentage)"
-      [attr.stroke-dasharray]="roomGraphicalData?.summary?.occupancyPercentage + ', 100'"
-      d="M18 2.0845
+                fill="none"
+                stroke="#eee"
+                stroke-width="3.8"
+              />
+              <path
+                class="circle"
+                [attr.stroke]="getOccColor(roomGraphicalData?.summary?.occupancyPercentage)"
+                [attr.stroke-dasharray]="roomGraphicalData?.summary?.occupancyPercentage + ', 100'"
+                d="M18 2.0845
          a 15.9155 15.9155 0 0 1 0 31.831
          a 15.9155 15.9155 0 0 1 0 -31.831"
-      fill="none"
-      stroke-width="3.8"
-    />
-    <text 
-      x="18" 
-      y="20.35" 
-      class="percentage" 
-      text-anchor="middle" 
-      alignment-baseline="middle"
-      [attr.font-size]="roomGraphicalData?.summary?.occupancyPercentage > 99 ? '6' : '8'">
-      {{ roomGraphicalData?.summary?.occupancyPercentage | number:'1.0-0' }}%
-    </text>
-  </svg>
-</div>
+                fill="none"
+                stroke-width="3.8"
+              />
+              <text
+                x="18"
+                y="20.35"
+                class="percentage"
+                text-anchor="middle"
+                alignment-baseline="middle"
+                [attr.font-size]="roomGraphicalData?.summary?.occupancyPercentage > 99 ? '6' : '8'"
+              >
+                {{ roomGraphicalData?.summary?.occupancyPercentage |
+                number:'1.0-0' }}%
+              </text>
+            </svg>
+          </div>
         </div>
       </div>
     </div>
@@ -52,27 +54,27 @@
       <ion-card-title> 🏠ROOM OVERVIEW</ion-card-title>
     </ion-card-header>
 
-   <ion-card-content>
-  <ion-grid>
-    <ion-row>
-      <ion-col
-        size="6"
-        size-sm="4"
-        size-md="3"
-        size-lg="2"
-        *ngFor="let card of cards"
-      >
-        <ion-card [color]="card.color" class="stat-card">
-          <div class="stat-wrapper">
-            <div class="stat-icon">{{ getCardIcon(card.title) }}</div>
-            <div class="stat-label">{{ card.title }}</div>
-            <div class="stat-value">{{ card.value }}</div>
-          </div>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-</ion-card-content>
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col
+            size="6"
+            size-sm="4"
+            size-md="3"
+            size-lg="2"
+            *ngFor="let card of cards"
+          >
+            <ion-card [color]="card.color" class="stat-card">
+              <div class="stat-wrapper">
+                <div class="stat-icon">{{ getCardIcon(card.title) }}</div>
+                <div class="stat-label">{{ card.title }}</div>
+                <div class="stat-value">{{ card.value }}</div>
+              </div>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
   </ion-card>
 
   <div class="section-container">
@@ -81,9 +83,9 @@
       <div class="table-scroll">
         <ion-grid class="modern-table-header">
           <ion-row class="table-row">
-            <ion-col class="table-cell">Cash</ion-col>
-            <ion-col class="table-cell">Credit Card</ion-col>
-            <ion-col class="table-cell">City Ledger</ion-col>
+            <ion-col>Cash</ion-col>
+            <ion-col>Credit Card</ion-col>
+            <ion-col>City Ledger</ion-col>
           </ion-row>
         </ion-grid>
       </div>
@@ -129,22 +131,27 @@
       <div class="table-scroll">
         <ion-grid class="modern-table-header">
           <ion-row class="table-row">
-           <ion-col >Room No</ion-col>
-            <ion-col >Guest Name</ion-col>
-            <ion-col >Check-in Date</ion-col>
-            <ion-col >Tariff</ion-col>
-            <ion-col >Balance</ion-col>
+            <ion-col>Room No</ion-col>
+            <ion-col>Guest Name</ion-col>
+            <ion-col>Check-in Date</ion-col>
+            <ion-col>Tariff</ion-col>
+            <ion-col>Balance</ion-col>
           </ion-row>
         </ion-grid>
         <ion-grid>
-  <ion-row  *ngFor="let guest of guests">
-       <ion-col >{{ guest.roomno?guest.roomno:'-' }}</ion-col>
-      <ion-col >{{ guest.fullName?guest.fullName:'-' }}</ion-col>
-      <ion-col>{{ guest.checkin_Date | date:'shortDate' }}</ion-col>
-      <ion-col>{{ guest.room_Charge?guest.room_Charge.toFixed(2):'-' }}</ion-col>
-      <ion-col>{{ guest.guest_Balance?guest.guest_Balance.toFixed(2):0 }}</ion-col>
-  </ion-row>
-</ion-grid>
+          <ion-row *ngFor="let guest of guests">
+            <ion-col>{{ guest.roomno?guest.roomno:'-' }}</ion-col>
+            <ion-col>{{ guest.fullName?guest.fullName:'-' }}</ion-col>
+            <ion-col>{{ guest.checkin_Date | date:'shortDate' }}</ion-col>
+            <ion-col
+              >{{ guest.room_Charge?guest.room_Charge.toFixed(2):'-' }}</ion-col
+            >
+            <ion-col
+              >{{ guest.guest_Balance?guest.guest_Balance.toFixed(2):0
+              }}</ion-col
+            >
+          </ion-row>
+        </ion-grid>
       </div>
 
       <div class="empty-state-modern" *ngIf="guests.length === 0">
@@ -155,26 +162,35 @@
   </div>
   <div class="section-container">
     <h2 class="section-title">📊 Daily Summary</h2>
-    <ion-card class="modern-card table-card">
+    <ion-card>
       <div class="table-scroll">
         <ion-grid class="modern-table-header">
-          <ion-row class="table-row">
-            <ion-col class="table-cell">Date</ion-col>
-            <ion-col class="table-cell">Rooms Reserved</ion-col>
-            <ion-col class="table-cell">Other</ion-col>
-            <ion-col class="table-cell">Cash</ion-col>
-            <ion-col class="table-cell">Card</ion-col>
-            <ion-col class="table-cell">Occupancy</ion-col>
-            <ion-col class="table-cell">Avg Rate</ion-col>
-            <ion-col class="table-cell">Check-in</ion-col>
-            <ion-col class="table-cell">Check-out</ion-col>
+          <ion-row>
+            <ion-col>Date</ion-col>
+            <ion-col>Rooms</ion-col>
+            <ion-col>Other</ion-col>
+            <ion-col>Cash</ion-col>
+            <ion-col>Card</ion-col>
+            <ion-col>Occupancy</ion-col>
+            <ion-col>Avg Rate</ion-col>
+            <ion-col>Check-in</ion-col>
+            <ion-col>Check-out</ion-col>
           </ion-row>
         </ion-grid>
-      </div>
 
-      <div class="empty-state-modern">
-        <div class="empty-icon">📅</div>
-        <p>No daily data available</p>
+        <ion-grid>
+          <ion-row>
+            <ion-col> </ion-col>
+            <ion-col> </ion-col>
+            <ion-col> </ion-col>
+            <ion-col> </ion-col>
+            <ion-col> </ion-col>
+            <ion-col> </ion-col>
+            <ion-col> </ion-col>
+            <ion-col> </ion-col>
+            <ion-col> </ion-col>
+          </ion-row>
+        </ion-grid>
       </div>
     </ion-card>
   </div>
@@ -202,7 +218,8 @@
             <ion-card-header class="chart-header">
               <ion-card-title>Revenue Trend</ion-card-title>
             </ion-card-header>
-            <ion-card-content>
+            <ion-card-content
+              >2
               <div class="chart-container">
                 <canvas #revenueChart></canvas>
               </div>
@@ -219,20 +236,20 @@
       <div class="table-scroll">
         <ion-grid class="modern-table-header">
           <ion-row class="table-row">
-            <ion-col >Room</ion-col>
-            <ion-col >Description</ion-col>
-            <ion-col >Amount</ion-col>
-            <ion-col >Void #</ion-col>
+            <ion-col>Room</ion-col>
+            <ion-col>Description</ion-col>
+            <ion-col>Amount</ion-col>
+            <ion-col>Void #</ion-col>
           </ion-row>
         </ion-grid>
         <ion-grid>
-  <ion-row  *ngFor="let item of voidTransactions">
-    <ion-col >{{ item.room }}</ion-col>
-    <ion-col >{{ item.description }}</ion-col>
-    <ion-col >${{ item.amount }}</ion-col>
-    <ion-col >{{ item.voidNo }}</ion-col>
-  </ion-row>
-</ion-grid>
+          <ion-row *ngFor="let item of voidTransactions">
+            <ion-col>{{ item.room }}</ion-col>
+            <ion-col>{{ item.description }}</ion-col>
+            <ion-col>${{ item.amount }}</ion-col>
+            <ion-col>{{ item.voidNo }}</ion-col>
+          </ion-row>
+        </ion-grid>
       </div>
 
       <div class="empty-state-modern" *ngIf="voidTransactions.length === 0">
