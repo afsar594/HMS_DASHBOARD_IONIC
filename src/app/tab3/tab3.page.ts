@@ -9,11 +9,10 @@ import { IonicModule } from '@ionic/angular';
 import { Chart, registerables } from 'chart.js';
 
 Chart.register(...registerables);
-import { 
+import {
   IonContent,
   IonHeader,
   IonToolbar,
-   
   IonGrid,
   IonRow,
   IonCol,
@@ -21,7 +20,6 @@ import {
   IonCardContent,
   IonCardHeader,
   IonCardTitle,
-   
 } from '@ionic/angular/standalone';
 // import { ExploreContainerComponent } from '../explore-container/explore-container.component';
 import { CommonModule, CurrencyPipe, DatePipe } from '@angular/common';
@@ -31,14 +29,14 @@ import { ReactiveFormsModule } from '@angular/forms';
   selector: 'app-tab3',
   templateUrl: 'tab3.page.html',
   styleUrls: ['tab3.page.scss'],
-    imports: [
-            CommonModule  // ✅ MUST
-,      // for ngFor, ngIf, etc.
-    DatePipe,          // for {{ date | date }}
-     IonContent,
+  imports: [
+    CommonModule, // ✅ MUST
+    // for ngFor, ngIf, etc.
+    DatePipe, // for {{ date | date }}
+    IonContent,
     IonHeader,
     IonToolbar,
-     
+
     IonGrid,
     IonRow,
     IonCol,
@@ -46,10 +44,10 @@ import { ReactiveFormsModule } from '@angular/forms';
     IonCardContent,
     IonCardHeader,
     IonCardTitle,
-     ],
- })
+  ],
+})
 export class Tab3Page implements OnDestroy {
-voidTransactions: any
+  voidTransactions: any;
   @ViewChild('avgChart') avgChartRef!: ElementRef<HTMLCanvasElement>;
   @ViewChild('revenueChart') revenueChartRef!: ElementRef<HTMLCanvasElement>;
   guests: any[] = [];
@@ -57,14 +55,15 @@ voidTransactions: any
   avgChart!: Chart;
   revenueChart!: Chart;
   roomGraphicalData: any;
-  cards: any
-  kpis: any
+  cards: any;
+  kpis: any;
   dailysummery: any;
+  pamentMethods: any;
   ngAfterViewInit() {
     // this.loadAvgRateChart();
     // this.loadRevenueChart();
     // ensure charts resize after initial layout
-      this.loadAnalytics();
+    this.loadAnalytics();
     setTimeout(() => this.resizeCharts(), 300);
   }
 
@@ -98,7 +97,6 @@ voidTransactions: any
   //     },
   //   });
   // }
-
 
   // loadRevenueChart() {
   //   this.revenueChart = new Chart(this.revenueChartRef.nativeElement, {
@@ -149,8 +147,6 @@ voidTransactions: any
     }
   }
 
-
-
   filters = [
     'Vacant Rooms',
     'Occupied Rooms',
@@ -179,17 +175,18 @@ voidTransactions: any
   ];
   constructor(private api: ApiService) {}
   ngOnInit() {
-  this.GetRoomGraphicalReport();
-     this.GetCurrentGuests();
+    this.GetRoomGraphicalReport();
+    this.GetCurrentGuests();
     this.GetTodayVoidTransactions();
-     this.loadAnalytics(); 
-     this.GetDailySummaryData()
+    this.loadAnalytics();
+    this.GetDailySummaryData();
+    this.GetPamentMethodsReport();
   }
   GetCurrentGuests() {
     this.api.GetCurrentGuests().subscribe(
       (res) => {
         if (res.isSuccess && res.data) {
-          this.guests = res.data; 
+          this.guests = res.data;
         } else {
           this.guests = [];
         }
@@ -202,10 +199,14 @@ voidTransactions: any
   }
   GetTodayVoidTransactions() {
     this.api.GetTodayVoidTransactions().subscribe((res) => {
-  this.voidTransactions = res.data;
-  });
+      this.voidTransactions = res.data;
+    });
   }
-
+  GetPamentMethodsReport() {
+    this.api.GetPamentMethodsReport().subscribe((res) => {
+      this.pamentMethods = res.data;
+    });
+  }
   getCardIcon(title: string): string {
     const icons: { [key: string]: string } = {
       Vacant: '🔓',
@@ -224,116 +225,118 @@ voidTransactions: any
     } catch (e) {}
   }
 
+  GetRoomGraphicalReport() {
+    this.api.GetRoomGraphicalReport().subscribe({
+      next: (res: any) => {
+        this.roomGraphicalData = res.data;
+        const summary = this.roomGraphicalData.summary
+          ? this.roomGraphicalData.summary
+          : 0;
 
-GetRoomGraphicalReport() {
+        // 🔹 Update KPI values from summary
+        this.kpis = [
+          { title: 'Out.Bal', value: summary?.outBalance },
+          { title: 'Day Rooms', value: summary?.dayUseRooms },
+          { title: 'Exp.Rev', value: summary?.expectedRevenue },
+          { title: 'Day Rev', value: summary?.dayRevenue },
+          { title: 'Avg.Rate', value: summary?.avgRate },
+          { title: 'Avg.Rate All', value: summary.avgRateAll },
+        ];
+        this.cards = [
+          { title: 'Vacant', color: 'light', value: summary?.vacantRooms },
+          { title: 'Occupid', color: 'light', value: summary?.occupiedRooms },
+          { title: 'Total Pax', color: 'light', value: 0 },
+          {
+            title: 'Today Checkout',
+            color: 'light',
+            value: summary?.todaysCheckouts,
+          },
+          { title: 'Exp Arrivals', color: 'light', value: 0 },
+        ];
+        console.log(this.kpis);
+      },
+      error: (err) => {
+        console.error('Room Graphical Report Error:', err);
+      },
+    });
+  }
+  getOccColor(percentage: number | undefined): string {
+    if (percentage === undefined) return 'gray';
 
-  this.api.GetRoomGraphicalReport().subscribe({
-    next: (res: any) => {
+    if (percentage >= 75) return 'red';
+    if (percentage >= 50) return 'orange';
+    return 'green';
+  }
 
-      this.roomGraphicalData = res.data;
-      const summary = this.roomGraphicalData.summary?this.roomGraphicalData.summary:0;
+  loadAnalytics() {
+    this.api.GetGraphsPercentageData().subscribe((res: any) => {
+      if (res?.isSuccess && res?.data) {
+        this.analyticsData = res.data;
 
-      // 🔹 Update KPI values from summary
-      this.kpis = [
-        { title: 'Out.Bal', value: summary?.outBalance },
-        { title: 'Day Rooms', value: summary?.dayUseRooms },
-        { title: 'Exp.Rev', value: summary?.expectedRevenue },
-        { title: 'Day Rev', value: summary?.dayRevenue },
-        { title: 'Avg.Rate', value: summary?.avgRate },
-        { title: 'Avg.Rate All', value: summary.avgRateAll },
-      ];
-this.cards = [
-  { title: 'Vacant', color: 'light', value: summary?.vacantRooms },
-  { title: 'Occupid', color: 'light', value: summary?.occupiedRooms },
-  { title: 'Total Pax', color: 'light', value: 0 },
-  { title: 'Today Checkout', color: 'light', value: summary?.todaysCheckouts  },
-  { title: 'Exp Arrivals', color: 'light', value: 0  },
-];
-      console.log(this.kpis);
+        this.updateAvgRateChart();
+        this.updateRevenueChart();
+      }
+    });
+  }
+  updateAvgRateChart() {
+    const labels = this.analyticsData.map((x) => x.date);
+    const data = this.analyticsData.map((x) => x.avgRate);
 
-    },
-    error: (err) => {
-      console.error('Room Graphical Report Error:', err);
-    }
-  });
-}
-getOccColor(percentage: number | undefined): string {
-  if (percentage === undefined) return 'gray'; 
+    if (this.avgChart) this.avgChart.destroy();
 
-  if (percentage >= 75) return 'red';     
-  if (percentage >= 50) return 'orange';  
-  return 'green';                         
-}
+    this.avgChart = new Chart(this.avgChartRef.nativeElement, {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: 'Avg Rate',
+            data: data,
+            borderColor: '#6366f1',
+            backgroundColor: 'rgba(99,102,241,0.2)',
+            tension: 0.4,
+            fill: true,
+            pointRadius: 4,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+      },
+    });
+  }
+  updateRevenueChart() {
+    const labels = this.analyticsData.map((x) => x.date);
+    const data = this.analyticsData.map((x) => x.totalRevenue);
 
- loadAnalytics() {
-  this.api.GetGraphsPercentageData().subscribe((res: any) => {
-    if (res?.isSuccess && res?.data) {
-      this.analyticsData = res.data;
+    if (this.revenueChart) this.revenueChart.destroy();
 
-      this.updateAvgRateChart();
-      this.updateRevenueChart();
-    }
-  });
-}
-updateAvgRateChart() {
-
-  const labels = this.analyticsData.map(x => x.date);
-  const data = this.analyticsData.map(x => x.avgRate);
-
-  if (this.avgChart) this.avgChart.destroy();
-
-  this.avgChart = new Chart(this.avgChartRef.nativeElement, {
-    type: 'line',
-    data: {
-      labels: labels,
-      datasets: [{
-        label: 'Avg Rate',
-        data: data,
-        borderColor: '#6366f1',
-        backgroundColor: 'rgba(99,102,241,0.2)',
-        tension: 0.4,
-        fill: true,
-        pointRadius: 4,
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false
-    }
-  });
-
-}
-updateRevenueChart() {
-
-  const labels = this.analyticsData.map(x => x.date);
-  const data = this.analyticsData.map(x => x.totalRevenue);
-
-  if (this.revenueChart) this.revenueChart.destroy();
-
-  this.revenueChart = new Chart(this.revenueChartRef.nativeElement, {
-    type: 'bar',
-    data: {
-      labels: labels,
-      datasets: [{
-        label: 'Revenue',
-        data: data,
-        backgroundColor: '#22c55e',
-        borderRadius: 6,
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false
-    }
-  });
-
-}
+    this.revenueChart = new Chart(this.revenueChartRef.nativeElement, {
+      type: 'bar',
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: 'Revenue',
+            data: data,
+            backgroundColor: '#22c55e',
+            borderRadius: 6,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+      },
+    });
+  }
   createCharts() {
     if (!this.analyticsData.length) return;
 
-    const labels = this.analyticsData.map(x => x.date);
-    const avgRates = this.analyticsData.map(x => x.avgRate);
-    const revenues = this.analyticsData.map(x => x.totalRevenue);
+    const labels = this.analyticsData.map((x) => x.date);
+    const avgRates = this.analyticsData.map((x) => x.avgRate);
+    const revenues = this.analyticsData.map((x) => x.totalRevenue);
 
     if (this.avgChart) this.avgChart.destroy();
     if (this.revenueChart) this.revenueChart.destroy();
@@ -342,42 +345,45 @@ updateRevenueChart() {
       type: 'line',
       data: {
         labels,
-        datasets: [{
-          label: 'Average Rate',
-          data: avgRates,
-          borderColor: '#6366f1',
-          backgroundColor: 'rgba(99,102,241,0.2)',
-          tension: 0.4,
-          fill: true,
-        }]
+        datasets: [
+          {
+            label: 'Average Rate',
+            data: avgRates,
+            borderColor: '#6366f1',
+            backgroundColor: 'rgba(99,102,241,0.2)',
+            tension: 0.4,
+            fill: true,
+          },
+        ],
       },
       options: {
         responsive: true,
-        maintainAspectRatio: false
-      }
+        maintainAspectRatio: false,
+      },
     });
 
     this.revenueChart = new Chart(this.revenueChartRef.nativeElement, {
       type: 'bar',
       data: {
         labels,
-        datasets: [{
-          label: 'Revenue',
-          data: revenues,
-          backgroundColor: '#22c55e',
-          borderRadius: 6
-        }]
+        datasets: [
+          {
+            label: 'Revenue',
+            data: revenues,
+            backgroundColor: '#22c55e',
+            borderRadius: 6,
+          },
+        ],
       },
       options: {
         responsive: true,
-        maintainAspectRatio: false
-      }
+        maintainAspectRatio: false,
+      },
     });
   }
-GetDailySummaryData(){
-  this.api.GetDailySummaryData().subscribe((res:any)=>{
-   this. dailysummery=res.data
-  })
-}
-
+  GetDailySummaryData() {
+    this.api.GetDailySummaryData().subscribe((res: any) => {
+      this.dailysummery = res.data;
+    });
+  }
 }

@@ -32,4 +32,7 @@ GetDailySummaryData() {
   GetCurrentGuests() {
     return this.http.get<any>(`${this.baseUrl}IonicData/GetCurrentGuests`);
   }
+  GetPamentMethodsReport() {
+    return this.http.get<any>(`${this.baseUrl}IonicData/GetPaymentMethods`);
+  }
 }
